@@ -1,5 +1,5 @@
 import React from "react";
-// import Login from "./Login";
+import Login from "./Login";
 import Signup from "./Signup"
 
 interface AuthProps {
@@ -20,7 +20,7 @@ class Auth extends React.Component<AuthProps /*AuthState*/> {
       <h3 className="spltitle">Where all of your dinner dreams come true!</h3>
       
       <Signup  updateLocalStorage={this.props.updateLocalStorage} />
-      {/* <Login className="splash" updateLocalStorage={props.updateLocalStorage} /> */}
+      <Login updateLocalStorage={this.props.updateLocalStorage} />
 
     </div>
 

@@ -1,7 +1,7 @@
 import React, {  useState, useEffect } from "react";
 import './App.css';
 import stove from "./Assets/stove.png"
-import Auth from './Components/Auth';
+import Auth from './Components/Auth/Auth';
 // import "bootstrap/dist/css/bootstrap.css";
 
 

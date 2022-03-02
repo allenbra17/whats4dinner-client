@@ -1,2 +1,62 @@
 import * as React from 'react';
-import { Component } from 'react';
+ interface LoginProps {
+  updateLocalStorage: (newToken: string) => void
+
+ }
+  
+ interface LoginState {
+    email: string,
+    password: string
+ }
+  
+ class Login extends React.Component<LoginProps, LoginState> {
+     constructor(props: LoginProps) {
+         super(props);
+         this.state = { email: "", password: "" };
+     }
+     handleSubmit = async (e: React.FormEvent<HTMLFormElement>) =>{
+        e.preventDefault();
+        
+        fetch("http://localhost:4000/user/login", {
+            method: "POST",
+            body: JSON.stringify({ email: this.state.email, password: this.state.password }),
+            headers: new Headers({
+              "Content-Type": "application/json",
+            }),
+        })
+        .then((res) => res.json())
+        .then((data) => this.props.updateLocalStorage(data.sessionToken))
+        .catch((err) => console.error(err));
+      }        
+     
+     render() {
+        
+         return ( <div>
+            <h1>Login</h1>
+            <form onSubmit={this.handleSubmit}>
+              <label htmlFor="email">Email</label>
+              <br />
+              <input
+                type="email"
+                value={this.state.email}
+                placeholder="Enter an email address"
+                onChange = {(e:any)=> this.setState({email: e.target.value})}
+              />
+              <br />
+              <label htmlFor="password">Password</label>
+              <br />
+              <input
+                type="password"
+                value={this.state.password}
+                placeholder="Enter a password"
+                minLength={5}
+                onChange = {(e:any)=> this.setState({password: e.target.value})}
+              />
+              <br />
+              <button type="submit" className='signup'>Submit Login</button>
+            </form>
+          </div> );
+     }
+ }
+  
+ export default Login;
