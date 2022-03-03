@@ -9,7 +9,7 @@ export interface CreateDrinks {
     createdAt: Date;
 }
 
-export interface IRecipeResponse {
+export interface IDrinkResponse {
     message: string;
     createDrinks: CreateDrinks;
 }

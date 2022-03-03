@@ -2,7 +2,8 @@ import React, {  useState, useEffect } from "react";
 import './App.css';
 import stove from "./Assets/stove.png"
 import Auth from './Components/Auth/Auth';
-import RecipeIndex from "./Components/AllRecipes/RecipeIndex";
+import DrinkIndex from "./Components/Drinks/DrinkIndex";
+
 // import "bootstrap/dist/css/bootstrap.css";
 
 
@@ -31,7 +32,7 @@ const App = () => {
   const adminPages = () => {
       return (
       <div>
-        <RecipeIndex /> 
+        <DrinkIndex/> 
         <h1>AdminPages</h1>
         <button onClick={logout}>Logout</button>
         </div>
@@ -40,7 +41,7 @@ const App = () => {
   const protectedPages = () => {
     return sessionToken === localStorage.getItem("token") ? (
       <div>
-        <RecipeIndex/>
+        <DrinkIndex/>
         <img src={stove} alt="" />
         <h1 className="title">Whats4Dinner</h1>
         <button onClick={logout}>Logout</button>
