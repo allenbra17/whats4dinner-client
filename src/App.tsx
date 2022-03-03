@@ -2,33 +2,45 @@ import React, {  useState, useEffect } from "react";
 import './App.css';
 import stove from "./Assets/stove.png"
 import Auth from './Components/Auth/Auth';
+import RecipeIndex from "./Components/AllRecipes/RecipeIndex";
 // import "bootstrap/dist/css/bootstrap.css";
 
 
 const App = () => {
   const [sessionToken, setSessionToken] = useState<String|null>("");
+  const [isAdmin, setIsAdmin] = useState(false);
   const logout = () => {
     localStorage.clear();
     setSessionToken("");
+    setIsAdmin(false)
   };
   useEffect(() => {
     if (localStorage.getItem("token")) {
       setSessionToken(localStorage.getItem("token"));
+      setIsAdmin((localStorage.getItem("role")=== "admin" ? true: false))
     }
   }, []);
 
-  const updateLocalStorage = (newToken: any) => {
+  const updateLocalStorage = (newToken: string, adminStatus: string) => {
     localStorage.setItem("token", newToken);
     setSessionToken(newToken);
+    localStorage.setItem("role", adminStatus)
+    setIsAdmin(adminStatus === "admin" ? true : false)
     };
-    console.log(sessionToken)
 
+  const adminPages = () => {
+      return (
+      <div>
+        <RecipeIndex /> 
+        <h1>AdminPages</h1>
+        <button onClick={logout}>Logout</button>
+        </div>
+      )
+      }
   const protectedPages = () => {
-    // const propertys = (
-      // <RecipeIndex token={this.setState({sessionToken: ""})} clickLogout={this.logout} />
-      // );
     return sessionToken === localStorage.getItem("token") ? (
       <div>
+        <RecipeIndex/>
         <img src={stove} alt="" />
         <h1 className="title">Whats4Dinner</h1>
         <button onClick={logout}>Logout</button>
@@ -37,8 +49,11 @@ const App = () => {
       <Auth updateLocalStorage={updateLocalStorage} />
     );
   };
-  return <div className="App">{protectedPages()}</div>;
-};
+  return (
+  (isAdmin ? (
+  <div className="App">{adminPages()}</div>):
+  (<div className="App">{protectedPages()}</div>)
+  ))};
 
 export default App;
 

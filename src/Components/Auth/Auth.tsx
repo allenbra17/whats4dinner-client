@@ -3,15 +3,11 @@ import Login from "./Login";
 import Signup from "./Signup"
 
 interface AuthProps {
-  updateLocalStorage: (newToken: string) => void
+  updateLocalStorage: (newToken: string, adminStatus: string) => void
 }
+
  
-// interface AuthState {
-  
-// }
- 
-class Auth extends React.Component<AuthProps /*AuthState*/> {
-  // state = { :  }
+class Auth extends React.Component<AuthProps> {
   render() { 
     return ( 
       <div>

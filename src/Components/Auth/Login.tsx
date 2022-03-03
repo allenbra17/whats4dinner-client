@@ -1,6 +1,7 @@
 import * as React from 'react';
+import { ILoginResponse } from './Login.interface';
  interface LoginProps {
-  updateLocalStorage: (newToken: string) => void
+  updateLocalStorage: (newToken: string, adminStatus: string) => void
 
  }
   
@@ -25,7 +26,7 @@ import * as React from 'react';
             }),
         })
         .then((res) => res.json())
-        .then((data) => this.props.updateLocalStorage(data.sessionToken))
+        .then((data:ILoginResponse) => this.props.updateLocalStorage(data.sessionToken, data.user.role))
         .catch((err) => console.error(err));
       }        
      

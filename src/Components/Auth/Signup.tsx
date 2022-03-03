@@ -1,6 +1,7 @@
 import * as React from 'react';
+import { ISignup } from './Signup.interface';
  interface SignupProps {
-  updateLocalStorage: (newToken: string) => void
+  updateLocalStorage: (newToken: string, adminStatus: string) => void
 
  }
   
@@ -8,26 +9,27 @@ import * as React from 'react';
     firstName: string,
     lastName: string,
     email: string,
-    password: string
+    password: string,
+    role: string
  }
   
  class Signup extends React.Component<SignupProps, SignupState> {
      constructor(props: SignupProps) {
          super(props);
-         this.state = { firstName: "", lastName: "", email: "", password: "" };
+         this.state = { firstName: "", lastName: "", email: "", password: "", role: "" };
      }
      handleSubmit = async (e: React.FormEvent<HTMLFormElement>) =>{
         e.preventDefault();
         
         fetch("http://localhost:4000/user/register", {
             method: "POST",
-            body: JSON.stringify({ firstName: this.state.firstName, lastName: this.state.lastName, email: this.state.email, password: this.state.password }),
+            body: JSON.stringify({ firstName: this.state.firstName, lastName: this.state.lastName, email: this.state.email, password: this.state.password, role: this.state.role}),
             headers: new Headers({
               "Content-Type": "application/json",
             }),
         })
         .then((res) => res.json())
-        .then((data) => this.props.updateLocalStorage(data.sessionToken))
+        .then((data: ISignup) => this.props.updateLocalStorage(data.sessionToken, data.user.role))
         .catch((err) => console.error(err));
       }        
      
