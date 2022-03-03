@@ -7,11 +7,23 @@ interface RecipeIndexProps {
 }
  
 interface RecipeIndexState {
-    
+    cocktailName: string,
+    mainIngredient: string,
+    cocktailURL: string,
+    imgURL: string,
+    userId: number
 }
  
 class RecipeIndex extends React.Component<RecipeIndexProps, RecipeIndexState> {
-    // state = { :  }
+    constructor(props: RecipeIndexProps) {
+        super(props);
+    this.state = {cocktailName: "",
+        mainIngredient: "",
+        cocktailURL: "",
+        imgURL: "",
+        userId: 0
+    }};
+    
     render() { 
         return ( <div>
             <img src={stove} alt="" />
