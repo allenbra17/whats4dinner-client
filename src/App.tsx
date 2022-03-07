@@ -5,7 +5,7 @@ import Auth from './Components/Auth/Auth';
 import DrinkIndex from "./Components/Drinks/DrinkIndex";
 import FoodIndex from "./Components/Food/FoodIndex";
 
-// import "bootstrap/dist/css/bootstrap.css";
+import "bootstrap/dist/css/bootstrap.css";
 
 
 const App = () => {
@@ -33,21 +33,24 @@ const App = () => {
   const adminPages = () => {
       return (
       <div>
+        <h1>AdminPages</h1>
+        <img src={stove} alt="" />
+        <br/>
+        <button onClick={logout}>Logout</button>
         <DrinkIndex/>
         <FoodIndex/>
-        <h1>AdminPages</h1>
-        <button onClick={logout}>Logout</button>
         </div>
       )
       }
   const protectedPages = () => {
     return sessionToken === localStorage.getItem("token") ? (
       <div>
+        <h1 className="title">Whats4Dinner</h1>
+        <img src={stove} alt="" />
+        <br/>
+        <button onClick={logout}>Logout</button>
         <DrinkIndex/>
         <FoodIndex/>
-        <img src={stove} alt="" />
-        <h1 className="title">Whats4Dinner</h1>
-        <button onClick={logout}>Logout</button>
       </div>
     ) : (
       <Auth updateLocalStorage={updateLocalStorage} />

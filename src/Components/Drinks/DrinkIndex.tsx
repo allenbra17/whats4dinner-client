@@ -1,6 +1,7 @@
 import * as React from 'react';
 import DrinksTable from './DrinksTable';
 // import './App.css';
+import "bootstrap/dist/css/bootstrap.css";
 
 
 
@@ -28,9 +29,13 @@ class DrinkIndex extends React.Component<DrinkIndexProps, DrinkIndexState> {
     }
     render() { 
         return ( 
-            <div>
-                <DrinksTable/>
-            </div>
+            <section className="p-5">
+            <div className="container">
+              <h1 className="text-center pb-3">Search Results</h1>
+              <DrinksTable/>
+              </div>
+          </section>
+            
          );
     }
 }

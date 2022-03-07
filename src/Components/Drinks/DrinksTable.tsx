@@ -2,6 +2,7 @@ import * as React from 'react';
 import  FetchDrinks from "./FetchDrinks";
 import { IFetchResponse } from "./Fetch.interface";
 // import './App.css';
+import "bootstrap/dist/css/bootstrap.css";
 
 interface DrinksTableProps {
 
@@ -34,7 +35,7 @@ class DrinksTable extends React.Component<DrinksTableProps, DrinksTableState> {
         return (<div>
             <span className="cards">
             <h4>{cocktailName}</h4>
-            <a href={drinkURL}><img src={image} alt={cocktailName} height='100px' width='100px'/></a>
+            <a href={drinkURL}><img src={image} alt={cocktailName}></img></a>
             </span>
             </div>
             )

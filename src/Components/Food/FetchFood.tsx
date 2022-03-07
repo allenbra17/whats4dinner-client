@@ -62,7 +62,7 @@ class FetchFood extends React.Component<FetchFoodProps, FetchFoodState> {
       <div>
         {this.myIngred()}
         <br />
-        <button onClick={this.handleIngredFetch}>Search by Ingredient</button>
+        <button onClick={this.handleIngredFetch}>Search by Food Category</button>
       </div>
     );
   }
