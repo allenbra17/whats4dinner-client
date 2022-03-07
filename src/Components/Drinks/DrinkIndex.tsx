@@ -1,15 +1,9 @@
 import * as React from 'react';
-import FetchDrinks from './FetchDrinks';
-let drinkID = 11007
-let baseURL = "https://www.thecocktaildb.com/api/json/v1/1/"
-let drinkURL = `https://www.thecocktaildb.com/drink/${drinkID}`
-let ingredientList = `${baseURL}list.php?i=list`
-let categoryList =`${baseURL}list.php?c=list`
-let drinkRecipe = new URL(baseURL + 'lookup.php?i=' + drinkID)
+import DrinksTable from './DrinksTable';
+// import './App.css';
 
-console.log(drinkURL);
-console.log(ingredientList);
-console.log(categoryList);
+
+
 
 
 
@@ -35,7 +29,7 @@ class DrinkIndex extends React.Component<DrinkIndexProps, DrinkIndexState> {
     render() { 
         return ( 
             <div>
-                <FetchDrinks />
+                <DrinksTable/>
             </div>
          );
     }

@@ -3,6 +3,7 @@ import './App.css';
 import stove from "./Assets/stove.png"
 import Auth from './Components/Auth/Auth';
 import DrinkIndex from "./Components/Drinks/DrinkIndex";
+import FoodIndex from "./Components/Food/FoodIndex";
 
 // import "bootstrap/dist/css/bootstrap.css";
 
@@ -32,7 +33,8 @@ const App = () => {
   const adminPages = () => {
       return (
       <div>
-        <DrinkIndex/> 
+        <DrinkIndex/>
+        <FoodIndex/>
         <h1>AdminPages</h1>
         <button onClick={logout}>Logout</button>
         </div>
@@ -42,6 +44,7 @@ const App = () => {
     return sessionToken === localStorage.getItem("token") ? (
       <div>
         <DrinkIndex/>
+        <FoodIndex/>
         <img src={stove} alt="" />
         <h1 className="title">Whats4Dinner</h1>
         <button onClick={logout}>Logout</button>

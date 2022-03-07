@@ -25,10 +25,3 @@ class Auth extends React.Component<AuthProps> {
 }
  
 export default Auth;
-
-
-
-
-
-
-
