@@ -1,10 +1,9 @@
 import * as React from "react";
 import { IFetchResponse } from "./Fetch.interface";
 import { Category } from "./Ingred.Interface";
-// import './App.css';
 
 interface FetchFoodProps {
-    handleFetch: (ingredient: string) => void
+  handleFetch: (ingredient: string) => void;
 }
 
 interface FetchFoodState {
@@ -23,46 +22,36 @@ class FetchFood extends React.Component<FetchFoodProps, FetchFoodState> {
 
   handleIngredFetch = async () => {
     const response = await fetch(this.categoryList);
-    console.log(response)
+    console.log(response);
     const json = await response.json();
-    this.setState({ ingredData: json.categories});
+    this.setState({ ingredData: json.categories });
     console.log(this.state.ingredData);
   };
 
-
-
-
   myIngred = () => {
     return this.state.ingredData.map((food, index) => {
-
-      
-      return  (
-
-        
+      return (
         <div>
-            <span className="cards">
-            <img src={food.strCategoryThumb}/>
-            <br/>
+          <span className="cards">
+            <img src={food.strCategoryThumb} alt={food.strCategory}/>
+            <br />
             <button onClick={() => this.props.handleFetch(food.strCategory)}>
-            {food.strCategory}
+              {food.strCategory}
             </button>
-            </span>
-
+          </span>
         </div>
-    
       );
-      
     });
-    
   };
-  
 
   render() {
     return (
       <div>
         {this.myIngred()}
         <br />
-        <button onClick={this.handleIngredFetch}>Search by Food Category</button>
+        <button onClick={this.handleIngredFetch}>
+          Search by Food Category
+        </button>
       </div>
     );
   }

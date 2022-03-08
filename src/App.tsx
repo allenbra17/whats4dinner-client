@@ -4,12 +4,10 @@ import stove from "./Assets/stove.png"
 import Auth from './Components/Auth/Auth';
 import DrinkIndex from "./Components/Drinks/DrinkIndex";
 import FoodIndex from "./Components/Food/FoodIndex";
-
 import "bootstrap/dist/css/bootstrap.css";
 
-
 const App = () => {
-  const [sessionToken, setSessionToken] = useState<String|null>("");
+  const [sessionToken, setSessionToken] = useState<any>("");
   const [isAdmin, setIsAdmin] = useState(false);
   const logout = () => {
     localStorage.clear();
@@ -37,7 +35,7 @@ const App = () => {
         <img src={stove} alt="" />
         <br/>
         <button onClick={logout}>Logout</button>
-        <DrinkIndex/>
+        <DrinkIndex sessionToken={sessionToken}/>
         <FoodIndex/>
         </div>
       )
@@ -49,7 +47,7 @@ const App = () => {
         <img src={stove} alt="" />
         <br/>
         <button onClick={logout}>Logout</button>
-        <DrinkIndex/>
+        <DrinkIndex sessionToken={sessionToken}/>
         <FoodIndex/>
       </div>
     ) : (

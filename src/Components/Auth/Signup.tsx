@@ -44,7 +44,7 @@ import { ISignup } from './Signup.interface';
                 type="text"
                 placeholder="Enter your first name"
                 value={this.state.firstName}
-                onChange = {(e:any)=> this.setState({firstName: e.target.value})}
+                onChange = {(e)=> this.setState({firstName: e.target.value})}
               />
               <br />
               <label htmlFor="lastName">Last Name</label>
@@ -54,7 +54,7 @@ import { ISignup } from './Signup.interface';
                 id="lastName"
                 placeholder="Enter your last name"
                 value={this.state.lastName}
-                onChange = {(e:any)=> this.setState({lastName: e.target.value})}
+                onChange = {(e)=> this.setState({lastName: e.target.value})}
               />
               <br />
               <label htmlFor="email">Email</label>
@@ -63,7 +63,7 @@ import { ISignup } from './Signup.interface';
                 type="email"
                 value={this.state.email}
                 placeholder="Enter an email address"
-                onChange = {(e:any)=> this.setState({email: e.target.value})}
+                onChange = {(e)=> this.setState({email: e.target.value})}
               />
               <br />
               <label htmlFor="password">Password</label>
@@ -73,7 +73,7 @@ import { ISignup } from './Signup.interface';
                 value={this.state.password}
                 placeholder="Enter a password"
                 minLength={5}
-                onChange = {(e:any)=> this.setState({password: e.target.value})}
+                onChange = {(e)=> this.setState({password: e.target.value})}
               />
               <br />
               <button type="submit" className='signup'>Submit Signup</button>

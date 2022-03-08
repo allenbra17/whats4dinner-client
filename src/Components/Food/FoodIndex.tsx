@@ -1,6 +1,5 @@
 import * as React from 'react';
 import FoodTable from './FoodTable';
-// import './App.css';
 
 
 
