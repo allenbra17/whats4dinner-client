@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Table } from "reactstrap";
+import { Button, Modal, ModalBody, ModalHeader, Table, Form, Input } from "reactstrap";
 
 
 interface GetAllUsersProps {
@@ -75,13 +75,40 @@ userModal: false
             <td>{users.lastName}</td>
             <td>{users.email}</td>
             <td>{users.role}</td>
+            <td><Button onClick={() => this.setState({ isUserModalOpen: true, currentUpdatingUser: users })}>Update User</Button></td>
             </tr>
   
           )
         })}
+        handlePasswordUpdate = async () => {
+
+          fetch(`http://localhost:4000/admin/users/${this.state.currentUpdatingUser.id}`, {
+            method: "PUT",
+            body: JSON.stringify({ password: this.state.newPassword }),
+            headers: new Headers({
+              "Content-Type": "application/json",
+              Authorization: this.props.sessionToken,
+            }),
+          })
+          .then(()=> this.toggleUserModal())
+          .catch((err) => console.error(err));
+        };
+        handleUserDelete = () => {
+          debugger
+          fetch(`http://localhost:4000/admin/users/${this.state.currentUpdatingUser.id}`, {
+            method: "DELETE",
+            headers: new Headers({
+              "Content-Type": "application/json",
+              Authorization: this.props.sessionToken,
+            }),
+          }).then (()=> this.toggleUserModal())
+        };
+      
     
-    render() { 
-        return (       <div className="tbl">
+    render() {
+      const user = this.state.currentUpdatingUser 
+        return (       
+        <div className="tbl">
           <button onClick={this.fetchGetAllUsers}>Get All Users</button>
         <Table>
           <th>UserId</th>
@@ -92,6 +119,29 @@ userModal: false
           <th></th>
           <tbody>{this.displayGetAllUsers()}</tbody>
         </Table>
+        <Modal
+          isOpen={this.state.isUserModalOpen}
+          toggle={this.toggleUserModal}>
+          <ModalHeader toggle={this.toggleUserModal}></ModalHeader>
+          <ModalBody>
+            <h2>{user.firstName} {user.lastName}</h2>
+            <h3>{user.email}</h3>
+            <br />
+            <Form>
+              <br />
+              <h3>Update User Password</h3>
+              <Input
+              type="password"
+                onChange={(e) => this.setState({ newPassword: e.target.value })}
+                placeholder="New Password"
+              />
+            </Form>
+              <Button onClick={()=>this.handlePasswordUpdate()}>Click to Change Password</Button>
+              <Button onClick={this.toggleUserModal}>Cancel</Button>
+              <Button onClick={()=> this.handleUserDelete()}>Delete User</Button>
+          </ModalBody>
+        </Modal>
+
         </div>
    );
     }
