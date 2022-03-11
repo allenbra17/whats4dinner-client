@@ -1,17 +1,17 @@
 import * as React from "react";
 import stove from "../../Assets/stove.png";
-import { Button, Col, Card, Row } from "react-bootstrap";
-import EditDrinksModal from "./EditDrinksModal";
-import EditFoodModal from "./EditFoodModal"
+import { Button, Col, Card, Row, Container } from "react-bootstrap";
+import EditDrinksModal from "../AllRecipes/EditDrinksModal";
+import EditFoodModal from "../AllRecipes/EditFoodModal"
 
-interface RecipeIndexProps {
+interface GetAllRecipesProps {
   sessionToken: string;
 }
 
-interface RecipeIndexState {
+interface GetAllRecipesState {
   isDrinkModalOpen: boolean;
   isFoodModalOpen: boolean;
-  myFoodArray: {
+  allFoodArray: {
     recipeName: string;
     category: string;
     recipeURL: string;
@@ -19,7 +19,7 @@ interface RecipeIndexState {
     rating: string;
     id: string;
   }[];
-  myDrinksArray: {
+  allDrinksArray: {
     cocktailName: string;
     mainIngredient: string;
     cocktailURL: string;
@@ -52,13 +52,13 @@ export interface CurrentEditingFood {
     id: string
 }
 
-class RecipeIndex extends React.Component<RecipeIndexProps, RecipeIndexState> {
-  constructor(props: RecipeIndexProps) {
+class GetAllRecipes extends React.Component<GetAllRecipesProps, GetAllRecipesState> {
+  constructor(props: GetAllRecipesProps) {
     super(props);
     this.state = {
       isDrinkModalOpen: false,
       isFoodModalOpen: false,
-      myFoodArray: [
+      allFoodArray: [
         {
           recipeName: "",
           category: "",
@@ -68,7 +68,7 @@ class RecipeIndex extends React.Component<RecipeIndexProps, RecipeIndexState> {
           id: "",
         },
       ],
-      myDrinksArray: [
+      allDrinksArray: [
         {
           cocktailName: "",
           mainIngredient: "",
@@ -88,8 +88,8 @@ class RecipeIndex extends React.Component<RecipeIndexProps, RecipeIndexState> {
   toggleDrinkModal = () => {
     this.setState({ isDrinkModalOpen: !this.state.isDrinkModalOpen });
   };
-  fetchMyDrinks = () => {
-    fetch("http://localhost:4000/drinks/mine", {
+  fetchAllDrinks = () => {
+    fetch("http://localhost:4000/admin/drinks", {
       method: "GET",
       headers: new Headers({
         "Content-Type": "application/json",
@@ -97,12 +97,12 @@ class RecipeIndex extends React.Component<RecipeIndexProps, RecipeIndexState> {
       }),
     })
       .then((res) => res.json())
-      .then((myDrinksData) => {
-        this.setState({ myDrinksArray: myDrinksData });
+      .then((allDrinksData) => {
+        this.setState({ allDrinksArray: allDrinksData });
       });
   };
-  displayMyDrinks = () => {
-    return this.state.myDrinksArray.map((drinks, index) => {
+  displayAllDrinks = () => {
+    return this.state.allDrinksArray.map((drinks, index) => {
       return (
         <Col>
           <Card>
@@ -131,8 +131,8 @@ class RecipeIndex extends React.Component<RecipeIndexProps, RecipeIndexState> {
     this.setState({ isFoodModalOpen: !this.state.isFoodModalOpen });
   };
 
-  fetchMyFood = () => {
-    fetch("http://localhost:4000/food/mine", {
+  fetchAllFood = () => {
+    fetch("http://localhost:4000/admin/food/", {
       method: "GET",
       headers: new Headers({
         "Content-Type": "application/json",
@@ -140,12 +140,12 @@ class RecipeIndex extends React.Component<RecipeIndexProps, RecipeIndexState> {
       }),
     })
       .then((res) => res.json())
-      .then((myFoodData) => {
-        this.setState({ myFoodArray: myFoodData });
+      .then((allFoodData) => {
+        this.setState({ allFoodArray: allFoodData });
       });
   };
   displayMyFood = () => {
-    return this.state.myFoodArray.map((food, index) => {return (
+    return this.state.allFoodArray.map((food, index) => {return (
         <Col>
           <Card>
             <a href={food.recipeURL}>
@@ -172,36 +172,37 @@ class RecipeIndex extends React.Component<RecipeIndexProps, RecipeIndexState> {
   render() {
     return (
       <div>
-        <h1 className="title">Whats4Dinner</h1>
-        <img src={stove} alt="" />
-        <h1 className="title">RecipeIndex</h1>
-        <h3>My Favorite Recipes</h3>
-        <h3>My Favorite Drinks</h3>
-        <button onClick={this.fetchMyDrinks}>getDrinks</button>
-        <button onClick={this.fetchMyFood}>getFood</button>
+        <h1 className="title">Favorite Recipes</h1>
+        <button onClick={(e) =>{
+          this.fetchAllFood()
+            this.fetchAllDrinks()}}>Get All Recipes</button>
+        <Container>
         <Col lg={2} className="food">
-          {this.state.myFoodArray.length > 0 ? this.displayMyFood() : null}
+          {this.state.allFoodArray.length > 0 ? this.displayMyFood() : null}
         </Col>
+        </Container>
+        <Container>
         <Col lg={2} className="drinks">
-          {this.state.myDrinksArray.length > 0 ? this.displayMyDrinks() : null}
+          {this.state.allDrinksArray.length > 0 ? this.displayAllDrinks() : null}
         </Col>
+        </Container>
         {this.state.isDrinkModalOpen ? <EditDrinksModal
                 isDrinkModalOpen={this.state.isDrinkModalOpen}
                 toggleDrinkModal={this.toggleDrinkModal}
                 currentEditingDrink={this.state.currentEditingDrink}
                 sessionToken={this.props.sessionToken}
-                myDrinksArray={this.state.myDrinksArray}
+                myDrinksArray={this.state.allDrinksArray}
               />: null}
         {this.state.isFoodModalOpen ? <EditFoodModal
                 isFoodModalOpen={this.state.isFoodModalOpen}
                 toggleFoodModal={this.toggleFoodModal}
                 currentEditingFood={this.state.currentEditingFood}
                 sessionToken={this.props.sessionToken}
-                myFoodArray={this.state.myFoodArray}
+                myFoodArray={this.state.allFoodArray}
               />: null}
       </div>
     );
   }
 }
 
-export default RecipeIndex;
+export default GetAllRecipes;

@@ -1,20 +1,27 @@
 import * as React from "react";
-// import { CurrentSelectedFood } from "./FoodTable";
-import { Button, Modal, ModalBody, ModalHeader, ModalFooter, Form, Input, } from "reactstrap";
+import { CurrentSelectedFood } from "./FoodTable";
+import {
+  Button,
+  Modal,
+  ModalBody,
+  ModalHeader,
+  Form,
+  Input,
+} from "reactstrap";
 import { CreateFood } from "./Food.interface";
 
 interface FoodSaveModalProps {
-  // currentSelectedFood: CurrentSelectedFood;
-  isModalOpen: boolean
-  toggleModal: () => void
-  SessionToken: string
+  currentSelectedFood: CurrentSelectedFood;
+  isModalOpen: boolean;
+  toggleModal: () => void;
+  sessionToken: string;
 }
 
 interface FoodSaveModalState {
-    // foodName: string;
-    modal: boolean
-    rating: number
-    createFood: CreateFood
+  recipeName: string;
+  modal: boolean;
+  rating: string;
+  createFood: CreateFood;
 }
 
 class FoodSaveModal extends React.Component<
@@ -24,65 +31,83 @@ class FoodSaveModal extends React.Component<
   constructor(props: FoodSaveModalProps) {
     super(props);
     this.state = {
-      // foodName: this.props.currentSelectedFood?.foodName,
-       modal: false, createFood: {} as CreateFood, rating: 0
+      recipeName: this.props.currentSelectedFood?.recipeName,
+      modal: false,
+      createFood: {} as CreateFood,
+      rating: "",
     };
   }
   modalOpen = () => {
-      console.log("click")
-      this.setState({ modal: !this.state.modal})
-      // console.log(this.props.currentSelectedFood.foodName)
-  }
+    this.setState({ modal: !this.state.modal });
+  };
+  handleSave = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    this.props.toggleModal();
+
+    fetch("http://localhost:4000/food/create", {
+      method: "POST",
+      body: JSON.stringify({
+        recipeName: this.state.createFood.recipeName,
+        category: this.state.createFood.category,
+        recipeURL: this.state.createFood.recipeURL,
+        imgURL: this.state.createFood.imgURL,
+        rating: ~~this.state.rating,
+      }),
+      headers: new Headers({
+        "Content-Type": "application/json",
+        Authorization: this.props.sessionToken,
+      }),
+    })
+      .then((res) => res.json())
+      .catch((err) => console.error(err));
+  };
   render() {
-    return (<div>
-
-
-  <Modal isOpen={this.props.isModalOpen}
-    toggle={this.props.toggleModal}
-  >
-    <ModalHeader toggle={this.props.toggleModal}>
-
-    </ModalHeader>
-    <ModalBody>
-        
-          {/* <h2>{this.props.currentSelectedFood.foodName}</h2>
-        
-          Main Ingredient:  {this.props.currentSelectedFood.mainIngredient}
-          <br/>
-          <a href={this.props.currentSelectedFood.foodURL}>Link to recipe</a>
-          <br/>
-          <br/>
-          <img src={this.props.currentSelectedFood.imgURL} alt={this.props.currentSelectedFood.foodName} height="100px" width="100px"/> */}
-          <Form>
-                <br/>
-          <Input
-            onChange={(e) => this.setState({rating: e.target.valueAsNumber })} placeholder="Rating"/>
-</Form>
-
-    </ModalBody>
-    <ModalFooter>
-          {/* <button onClick ={()=> this.setState({ createFood: ({foodName: this.props.currentSelectedFood.foodName, foodURL: this.props.currentSelectedFood.foodURL, imgURL:this.props.currentSelectedFood.imgURL, mainIngredient: this.props.currentSelectedFood.mainIngredient, rating: this.state.rating})})}>Click to Save </button> */}
-      {/* <Button
-        color="primary"
-        onClick={function noRefCheck(){}}
-      >
-        Do Something
-      </Button>
-      {' '}
-      <Button onClick={function noRefCheck(){}}>
-        Cancel
-      </Button> */}
-    </ModalFooter>
-  </Modal>
-
-
-
-
-        {/* <Button onClick={this.modalOpen}>Modal</Button>
-      <Modal isOpen={this.state.modal} >
-        <ModalBody>Modal Body */}
-        {/* </ModalBody>
-      </Modal> */}
+    return (
+      <div>
+        <Modal isOpen={this.props.isModalOpen} toggle={this.props.toggleModal}>
+          <ModalHeader toggle={this.props.toggleModal}></ModalHeader>
+          <ModalBody>
+            <h2>{this.props.currentSelectedFood.recipeName}</h2>
+            Category: {this.props.currentSelectedFood.category}
+            <br />
+            <a href={this.props.currentSelectedFood.recipeURL}>
+              Link to recipe
+            </a>
+            <br />
+            <br />
+            <img
+              src={this.props.currentSelectedFood.imgURL}
+              alt={this.props.currentSelectedFood.recipeName}
+              height="100px"
+              width="100px"
+            />
+            <Form  onSubmit={this.handleSave}>
+              <br />
+              <Input
+                onChange={(e) =>this.setState({ rating: e.target.value })}
+                placeholder="Rating"
+              />
+              <Button
+                type="submit"
+                onClick={() =>
+                  this.setState({
+                    createFood: {
+                      recipeName: 
+                        this.props.currentSelectedFood.recipeName,
+                      recipeURL: this.props.currentSelectedFood.recipeURL,
+                      imgURL: this.props.currentSelectedFood.imgURL,
+                      category:
+                        this.props.currentSelectedFood.category,
+                    },
+                  })
+                }
+              >
+                Click to Save
+              </Button>
+              <Button onClick={this.props.toggleModal}>Cancel</Button>
+            </Form>
+          </ModalBody>
+        </Modal>
       </div>
     );
   }

@@ -2,3 +2,8 @@
   text-align: center;
 }
 
+span{
+flex-direction: row;
+display: flex;
+}
+

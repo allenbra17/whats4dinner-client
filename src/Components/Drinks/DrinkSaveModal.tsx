@@ -1,13 +1,6 @@
 import * as React from "react";
 import { CurrentSelectedDrink } from "./DrinksTable";
-import {
-  Button,
-  Modal,
-  ModalBody,
-  ModalHeader,
-  Form,
-  Input,
-} from "reactstrap";
+import { Button, Modal, ModalBody, ModalHeader, Form, Input } from "reactstrap";
 import { CreateDrinks } from "./Drinks.interface";
 
 interface DrinkSaveModalProps {
@@ -64,7 +57,10 @@ class DrinkSaveModal extends React.Component<
   render() {
     return (
       <div>
-        <Modal isOpen={this.props.isModalOpen} toggle={this.props.toggleModal}>
+        <Modal
+          isOpen={this.props.isModalOpen}
+          toggle={this.props.toggleModal}
+        >
           <ModalHeader toggle={this.props.toggleModal}></ModalHeader>
           <ModalBody>
             <h2>{this.props.currentSelectedDrink.cocktailName}</h2>
@@ -102,9 +98,9 @@ class DrinkSaveModal extends React.Component<
                   })
                 }
               >
-                Click to Save{" "}
+                Click to Save
               </Button>
-              <Button onClick={function noRefCheck() {}}>Cancel</Button>
+              <Button onClick={this.props.toggleModal}>Cancel</Button>
             </Form>
           </ModalBody>
         </Modal>

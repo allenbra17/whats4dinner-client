@@ -7,7 +7,7 @@ import { Button, Col, Card, Row } from "react-bootstrap";
 interface DrinksTableProps {
   sessionToken: string;
 }
-interface DrinksTableState {
+export interface DrinksTableState {
   drinksData: IFetchResponse[];
   mainIngredient: string;
   currentSelectedDrink: CurrentSelectedDrink;
@@ -33,7 +33,6 @@ class DrinksTable extends React.Component<DrinksTableProps, DrinksTableState> {
       isModalOpen: false,
     };
   }
-
   toggleModal = () => {
     this.setState({ isModalOpen: !this.state.isModalOpen });
   };
@@ -49,7 +48,6 @@ class DrinksTable extends React.Component<DrinksTableProps, DrinksTableState> {
       let cocktailName: string = drinks.strDrink;
       let image = drinks.strDrinkThumb;
       let drinkURL = `${this.cocktailURL}${drinks.idDrink}`;
-
       return (
         <Row xs={1} md={2} lg={2} className="g-4">
           {Array.from({ length: 1 }).map((_, idx) => (

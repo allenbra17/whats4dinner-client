@@ -1,37 +1,23 @@
 import * as React from 'react';
 import FoodTable from './FoodTable';
 
-
-
-
-
-
 interface FoodIndexProps {
-    
+    sessionToken: string;
 }
  
-interface FoodIndexState {
-    recipeName: string,
-    mainIngredient: string,
-    recipeURL: string,
-    imgURL: string
-}
- 
-class FoodIndex extends React.Component<FoodIndexProps, FoodIndexState> {
-    constructor(props: FoodIndexProps) {
-        super(props);
-        this.state = {recipeName: "",
-            mainIngredient: "",
-            recipeURL: "",
-            imgURL: ""};
-    }
+class FoodIndex extends React.Component<FoodIndexProps> {
     render() { 
         return ( 
-            <div>
-                <FoodTable/>
+            <section className="p-5">
+            <div className="container">
+              <div className="row pb-5">
+                <div className="col-lg-2 col-md-1">
+                  <FoodTable sessionToken={this.props.sessionToken} />
+                </div>
+              </div>
             </div>
-         );
+          </section>
+        );
+      }
     }
-}
- 
 export default FoodIndex;
