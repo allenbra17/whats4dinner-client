@@ -22,17 +22,15 @@ class FetchFood extends React.Component<FetchFoodProps, FetchFoodState> {
 
   handleIngredFetch = async () => {
     const response = await fetch(this.categoryList);
-    console.log(response);
     const json = await response.json();
     this.setState({ ingredData: json.categories });
-    console.log(this.state.ingredData);
   };
 
   myIngred = () => {
     return this.state.ingredData.map((food, index) => {
       return (
         <div>
-          <span className="cards">
+          <span>
             <img src={food.strCategoryThumb} alt={food.strCategory}/>
             <br />
             <button onClick={() => this.props.handleFetch(food.strCategory)}>

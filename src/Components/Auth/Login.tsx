@@ -54,7 +54,7 @@ import { ILoginResponse } from './Login.interface';
                 onChange = {(e:any)=> this.setState({password: e.target.value})}
               />
               <br />
-              <button type="submit" className='signup'>Submit Login</button>
+              <button className='signup' onClick={(e)=>console.log('click')}>Submit Login</button>
             </form>
           </div> );
      }

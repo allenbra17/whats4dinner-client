@@ -70,7 +70,7 @@ userModal: false
         return this.state.GetAllUsersArray.map((users, index) => {
           return (
             <tr key={index}>
-            <td scope="row">{users.id}</td>
+            <td>{users.id}</td>
             <td>{users.firstName}</td>
             <td>{users.lastName}</td>
             <td>{users.email}</td>
@@ -116,8 +116,8 @@ userModal: false
           <th>Last Name</th>
           <th>Email</th>
           <th>Role</th>
-          <th></th>
-          <tbody>{this.displayGetAllUsers()}</tbody>
+          <th>View</th>
+          <tbody>{this.displayGetAllUsers}</tbody>
         </Table>
         <Modal
           isOpen={this.state.isUserModalOpen}

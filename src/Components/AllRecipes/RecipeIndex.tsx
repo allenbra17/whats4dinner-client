@@ -179,11 +179,11 @@ class RecipeIndex extends React.Component<RecipeIndexProps, RecipeIndexState> {
         <h3>My Favorite Drinks</h3>
         <button onClick={this.fetchMyDrinks}>getDrinks</button>
         <button onClick={this.fetchMyFood}>getFood</button>
-        <Col lg={2} className="food">
-          {this.state.myFoodArray.length > 0 ? this.displayMyFood() : null}
+        <Col>
+          {this.state.myFoodArray.length > 1 ? this.displayMyFood() : null}
         </Col>
-        <Col lg={2} className="drinks">
-          {this.state.myDrinksArray.length > 0 ? this.displayMyDrinks() : null}
+        <Col>
+          {this.state.myDrinksArray.length > 1 ? this.displayMyDrinks() : null}
         </Col>
         {this.state.isDrinkModalOpen ? <EditDrinksModal
                 isDrinkModalOpen={this.state.isDrinkModalOpen}

@@ -49,7 +49,7 @@ class DrinksTable extends React.Component<DrinksTableProps, DrinksTableState> {
       let image = drinks.strDrinkThumb;
       let drinkURL = `${this.cocktailURL}${drinks.idDrink}`;
       return (
-        <Row xs={1} md={2} lg={2} className="g-4">
+        <Row>
           {Array.from({ length: 1 }).map((_, idx) => (
             <Col>
               <Card>

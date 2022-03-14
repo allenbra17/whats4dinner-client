@@ -49,7 +49,7 @@ class FoodTable extends React.Component<FoodTableProps, FoodTableState> {
       let image = food.strMealThumb;
       let recipeURL = `${this.mealURL}${food.idMeal}`;
       return (
-        <Row xs={1} md={2} lg={2} className="g-4">
+        <Row>
           {Array.from({ length: 1 }).map((_, idx) => (
             <Col>
               <Card>

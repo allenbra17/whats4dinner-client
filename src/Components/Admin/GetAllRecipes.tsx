@@ -1,5 +1,4 @@
 import * as React from "react";
-import stove from "../../Assets/stove.png";
 import { Button, Col, Card, Row, Container } from "react-bootstrap";
 import EditDrinksModal from "../AllRecipes/EditDrinksModal";
 import EditFoodModal from "../AllRecipes/EditFoodModal"
@@ -177,13 +176,13 @@ class GetAllRecipes extends React.Component<GetAllRecipesProps, GetAllRecipesSta
           this.fetchAllFood()
             this.fetchAllDrinks()}}>Get All Recipes</button>
         <Container>
-        <Col lg={2} className="food">
-          {this.state.allFoodArray.length > 0 ? this.displayMyFood() : null}
+        <Col>
+          {this.state.allFoodArray.length > 1 ? this.displayMyFood() : null}
         </Col>
         </Container>
         <Container>
-        <Col lg={2} className="drinks">
-          {this.state.allDrinksArray.length > 0 ? this.displayAllDrinks() : null}
+        <Col>
+          {this.state.allDrinksArray.length > 1 ? this.displayAllDrinks() : null}
         </Col>
         </Container>
         {this.state.isDrinkModalOpen ? <EditDrinksModal

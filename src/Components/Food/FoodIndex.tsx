@@ -8,10 +8,10 @@ interface FoodIndexProps {
 class FoodIndex extends React.Component<FoodIndexProps> {
     render() { 
         return ( 
-            <section className="p-5">
-            <div className="container">
-              <div className="row pb-5">
-                <div className="col-lg-2 col-md-1">
+            <section>
+            <div>
+              <div>
+                <div>
                   <FoodTable sessionToken={this.props.sessionToken} />
                 </div>
               </div>

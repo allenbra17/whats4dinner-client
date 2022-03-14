@@ -32,15 +32,15 @@ class FetchDrinks extends React.Component<FetchDrinksProps, FetchDrinksState> {
   myIngred = () => {
     return this.state.ingredData.map((drinks, index) => {
       return (
-        <div className="card">
+        <div>
           <img
             src={`http://www.thecocktaildb.com/images/ingredients/${drinks.strIngredient1}-Small.png`}
             className="card-img-top"
             alt="..."
           />
           <button onClick={() => this.props.handleFetch(drinks.strIngredient1)}>
-            <div className="card-body">
-              <h5 className="card-title">{drinks.strIngredient1}</h5>
+            <div>
+              <h5>{drinks.strIngredient1}</h5>
             </div>
           </button>
         </div>
