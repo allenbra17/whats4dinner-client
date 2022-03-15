@@ -37,7 +37,7 @@ class DrinkSaveModal extends React.Component<
     e.preventDefault();
     this.props.toggleModal();
 
-    fetch("http://localhost:4000/drinks/create", {
+    fetch(`${APIURL}/drinks/create`, {
       method: "POST",
       body: JSON.stringify({
         cocktailName: this.state.createDrink.cocktailName,

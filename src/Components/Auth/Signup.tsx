@@ -21,7 +21,7 @@ import { ISignup } from './Signup.interface';
      handleSubmit = async (e: React.FormEvent<HTMLFormElement>) =>{
         e.preventDefault();
         
-        fetch("http://localhost:4000/user/register", {
+        fetch(`${APIURL}/user/register`, {
             method: "POST",
             body: JSON.stringify({ firstName: this.state.firstName, lastName: this.state.lastName, email: this.state.email, password: this.state.password, role: this.state.role}),
             headers: new Headers({

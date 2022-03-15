@@ -57,7 +57,7 @@ class GetAllUsers extends React.Component<GetAllUsersProps, GetAllUsersState> {
     this.setState({ isUserModalOpen: !this.state.isUserModalOpen });
   };
   fetchGetAllUsers = () => {
-    fetch("http://localhost:4000/admin/users", {
+    fetch(`${APIURL}/admin/users`, {
       method: "GET",
       headers: new Headers({
         "Content-Type": "application/json",
@@ -96,7 +96,7 @@ class GetAllUsers extends React.Component<GetAllUsersProps, GetAllUsersState> {
   };
   handlePasswordUpdate = async () => {
     fetch(
-      `http://localhost:4000/admin/users/${this.state.currentUpdatingUser.id}`,
+      `${APIURL}/admin/users/${this.state.currentUpdatingUser.id}`,
       {
         method: "PUT",
         body: JSON.stringify({ password: this.state.newPassword }),
@@ -112,7 +112,7 @@ class GetAllUsers extends React.Component<GetAllUsersProps, GetAllUsersState> {
   handleUserDelete = () => {
     debugger;
     fetch(
-      `http://localhost:4000/admin/users/${this.state.currentUpdatingUser.id}`,
+      `${APIURL}/admin/users/${this.state.currentUpdatingUser.id}`,
       {
         method: "DELETE",
         headers: new Headers({

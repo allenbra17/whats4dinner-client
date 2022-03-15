@@ -38,7 +38,7 @@ class EditDrinksModal extends React.Component<
   }
   handleDrinkEdit = async () => {
 
-    fetch(`http://localhost:4000/drinks/${this.props.currentEditingDrink.id}`, {
+    fetch(`${APIURL}/drinks/${this.props.currentEditingDrink.id}`, {
       method: "PUT",
       body: JSON.stringify({ rating: ~~this.state.editRating }),
       headers: new Headers({
@@ -51,7 +51,7 @@ class EditDrinksModal extends React.Component<
   };
   handleDrinkDelete = () => {
     debugger
-    fetch(`http://localhost:4000/drinks/${this.props.currentEditingDrink.id}`, {
+    fetch(`${APIURL}/drinks/${this.props.currentEditingDrink.id}`, {
       method: "DELETE",
       headers: new Headers({
         "Content-Type": "application/json",

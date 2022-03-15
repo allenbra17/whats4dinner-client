@@ -99,7 +99,7 @@ class GetAllRecipes extends React.Component<
     this.setState({ isDrinkModalOpen: !this.state.isDrinkModalOpen });
   };
   fetchAllDrinks = () => {
-    fetch("http://localhost:4000/admin/drinks", {
+    fetch(`${APIURL}admin/drinks`, {
       method: "GET",
       headers: new Headers({
         "Content-Type": "application/json",
@@ -146,7 +146,7 @@ class GetAllRecipes extends React.Component<
   };
 
   fetchAllFood = () => {
-    fetch("http://localhost:4000/admin/food/", {
+    fetch(`${APIURL}/admin/food/`, {
       method: "GET",
       headers: new Headers({
         "Content-Type": "application/json",

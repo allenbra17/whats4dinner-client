@@ -37,7 +37,7 @@ class EditFoodModal extends React.Component<
     };
   }
   handleFoodEdit = async () => {
-    fetch(`http://localhost:4000/drinks/${this.props.currentEditingFood.id}`, {
+    fetch(`${APIURL}/drinks/${this.props.currentEditingFood.id}`, {
       method: "PUT",
       body: JSON.stringify({ rating: ~~this.state.editRating }),
       headers: new Headers({
@@ -49,7 +49,7 @@ class EditFoodModal extends React.Component<
       .catch((err) => console.error(err));
   };
   handleFoodDelete = () => {
-    fetch(`http://localhost:4000/food/${this.props.currentEditingFood.id}`, {
+    fetch(`${APIURL}/food/${this.props.currentEditingFood.id}`, {
       method: "DELETE",
       headers: new Headers({
         "Content-Type": "application/json",
