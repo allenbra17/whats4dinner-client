@@ -1,69 +1,114 @@
-import React, {  useState, useEffect } from "react";
-import './App.css';
-import stove from "./Assets/stove.png"
-import Auth from './Components/Auth/Auth';
+import React, { useState, useEffect, useRef } from "react";
+import { Route, Routes } from "react-router-dom";
+import "./App.css";
+import stove from "./Assets/stove.png";
+import Auth from "./Components/Auth/Auth";
 import DrinkIndex from "./Components/Drinks/DrinkIndex";
 import FoodIndex from "./Components/Food/FoodIndex";
-import "bootstrap/dist/css/bootstrap.css";
 import RecipeIndex from "./Components/AllRecipes/RecipeIndex";
 import GetAllRecipes from "./Components/Admin/GetAllRecipes";
 import GetAllUsers from "./Components/Admin/GetAllUsers";
+import Sitebar from "./Components/Navbar/Navbar";
 
 const App = () => {
   const [sessionToken, setSessionToken] = useState<any>("");
   const [isAdmin, setIsAdmin] = useState(false);
+  const [isSplash, setIsSplash] = useState(true);
   const logout = () => {
     localStorage.clear();
     setSessionToken("");
-    setIsAdmin(false)
+    setIsAdmin(false);
   };
   useEffect(() => {
     if (localStorage.getItem("token")) {
       setSessionToken(localStorage.getItem("token"));
-      setIsAdmin((localStorage.getItem("role")=== "admin" ? true: false))
+      setIsAdmin(localStorage.getItem("role") === "admin" ? true : false);
     }
   }, []);
 
   const updateLocalStorage = (newToken: string, adminStatus: string) => {
     localStorage.setItem("token", newToken);
     setSessionToken(newToken);
-    localStorage.setItem("role", adminStatus)
-    setIsAdmin(adminStatus === "admin" ? true : false)
-    };
+    localStorage.setItem("role", adminStatus);
+    setIsAdmin(adminStatus === "admin" ? true : false);
+  };
+  
 
   const adminPages = () => {
-      return (
-      <div>
-        <h1>AdminPages</h1>
-        <button onClick={logout}>Logout</button>
-        <span>
-        <DrinkIndex sessionToken={sessionToken}/><FoodIndex  sessionToken={sessionToken}/>
-        </span>
-        <GetAllRecipes sessionToken={sessionToken}/>
-        <GetAllUsers sessionToken={sessionToken}/>
-        </div>
-      )
-      }
+    return (
+      <React.Fragment>
+        <Sitebar
+          sessionToken={sessionToken}
+          logout={logout}
+          isAdmin={isAdmin}
+        />
+        <br/>
+        <br/>
+        <br/>
+        <Routes>
+          <Route
+          path="/*"
+          element={isSplash ? <RecipeIndex sessionToken={sessionToken} />: null}></Route>
+
+          <Route 
+            path="/fetchFood"
+            element={<FoodIndex sessionToken={sessionToken} /> }
+          ></Route>
+          <Route
+            path="/fetchDrinks"
+            element={<DrinkIndex sessionToken={sessionToken} />}
+          ></Route>
+          <Route
+            path="/getMyRecipes"
+            element={<RecipeIndex sessionToken={sessionToken} />}
+          ></Route>
+          <Route
+            path="/getAllRecipes"
+            element={<GetAllRecipes sessionToken={sessionToken} />}
+          ></Route>
+          <Route
+            path="/getAllUsers"
+            element={<GetAllUsers sessionToken={sessionToken} />}
+          ></Route>
+        </Routes>
+      </React.Fragment>
+    );
+  };
   const protectedPages = () => {
     return sessionToken === localStorage.getItem("token") ? (
       <div>
-        <h1 className="title">Whats4Dinner</h1>
-        <img src={stove} alt="" />
+        <Sitebar
+          sessionToken={sessionToken}
+          logout={logout}
+          isAdmin={isAdmin}
+        />
         <br/>
-        <button onClick={logout}>Logout</button>
-        <DrinkIndex sessionToken={sessionToken}/>
-        <FoodIndex  sessionToken={sessionToken}/>
-        <RecipeIndex sessionToken={sessionToken}/>
+        <br/>
+        <br/>
+        <Routes>
+          <Route
+            path="/fetchFood"
+            element={<FoodIndex sessionToken={sessionToken} />}
+          ></Route>
+          <Route
+            path="/fetchDrinks"
+            element={<DrinkIndex sessionToken={sessionToken} />}
+          ></Route>
+          <Route
+            path="/getMyRecipes"
+            element={<RecipeIndex sessionToken={sessionToken} />}
+          ></Route>
+        </Routes>
       </div>
     ) : (
       <Auth updateLocalStorage={updateLocalStorage} />
     );
   };
-  return (
-  (isAdmin ? (
-  <div className="App">{adminPages()}</div>):
-  (<div className="App">{protectedPages()}</div>)
-  ))};
+  return isAdmin ? (
+    <div className="App">{adminPages()}</div>
+  ) : (
+    <div className="App">{protectedPages()}</div>
+  );
+};
 
 export default App;
-

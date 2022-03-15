@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Button, Modal, ModalBody, ModalHeader, Form, Input } from "reactstrap";
+import { Modal, ModalBody, ModalHeader, Form, Input } from "reactstrap";
 import { CreateFood } from "../Food/Food.interface";
 import { CurrentEditingFood } from "./RecipeIndex";
 
@@ -57,17 +57,19 @@ class EditFoodModal extends React.Component<
       }),
     }).then (()=> this.props.toggleFoodModal())
   };
+  reload=()=>window.location.reload()
   render() {
     const food = this.props.currentEditingFood;
     return (
       <div>
         <Modal
+        onExit={this.reload}
           isOpen={this.props.isFoodModalOpen}
           toggle={this.props.toggleFoodModal}>
           <ModalHeader toggle={this.props.toggleFoodModal}></ModalHeader>
           <ModalBody>
-            <h2>{food.recipeName}</h2>
-            <h3>Main Ingredient: {food.category}</h3>
+            <h3>{food.recipeName}</h3>
+            <h4>Main Ingredient: {food.category}</h4>
             <br />
             <a href={food.recipeURL}>Link to recipe</a>
             <br />
@@ -86,9 +88,9 @@ class EditFoodModal extends React.Component<
                 placeholder="Rating"
               />
             </Form>
-              <Button onClick={()=>this.handleFoodEdit()}>Click to Change Rating</Button>
-              <Button onClick={this.props.toggleFoodModal}>Cancel</Button>
-              <Button onClick={()=> this.handleFoodDelete()}>Delete</Button>
+              <button onClick={()=>this.handleFoodEdit()}>Click to Change Rating</button>
+              <button onClick={this.props.toggleFoodModal}>Cancel</button>
+              <button onClick={()=> this.handleFoodDelete()}>Delete</button>
           </ModalBody>
         </Modal>
       </div>

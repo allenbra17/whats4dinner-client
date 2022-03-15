@@ -1,6 +1,6 @@
 import * as React from "react";
 import { CurrentSelectedDrink } from "./DrinksTable";
-import { Button, Modal, ModalBody, ModalHeader, Form, Input } from "reactstrap";
+import { Modal, ModalBody, ModalHeader, Form, Input } from "reactstrap";
 import { CreateDrinks } from "./Drinks.interface";
 
 interface DrinkSaveModalProps {
@@ -83,7 +83,7 @@ class DrinkSaveModal extends React.Component<
                 onChange={(e) => this.setState({ rating: e.target.value })}
                 placeholder="Rating"
               />
-              <Button
+              <button
                 type="submit"
                 onClick={() =>
                   this.setState({
@@ -99,8 +99,8 @@ class DrinkSaveModal extends React.Component<
                 }
               >
                 Click to Save
-              </Button>
-              <Button onClick={this.props.toggleModal}>Cancel</Button>
+              </button>
+              <button onClick={this.props.toggleModal}>Cancel</button>
             </Form>
           </ModalBody>
         </Modal>

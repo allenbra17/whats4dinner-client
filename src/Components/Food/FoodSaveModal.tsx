@@ -1,7 +1,6 @@
 import * as React from "react";
 import { CurrentSelectedFood } from "./FoodTable";
 import {
-  Button,
   Modal,
   ModalBody,
   ModalHeader,
@@ -87,7 +86,7 @@ class FoodSaveModal extends React.Component<
                 onChange={(e) =>this.setState({ rating: e.target.value })}
                 placeholder="Rating"
               />
-              <Button
+              <button
                 type="submit"
                 onClick={() =>
                   this.setState({
@@ -103,8 +102,8 @@ class FoodSaveModal extends React.Component<
                 }
               >
                 Click to Save
-              </Button>
-              <Button onClick={this.props.toggleModal}>Cancel</Button>
+              </button>
+              <button onClick={this.props.toggleModal}>Cancel</button>
             </Form>
           </ModalBody>
         </Modal>

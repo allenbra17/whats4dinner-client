@@ -30,13 +30,15 @@ import { ISignup } from './Signup.interface';
         })
         .then((res) => res.json())
         .then((data: ISignup) => this.props.updateLocalStorage(data.sessionToken, data.user.role))
-        .catch((err) => console.error(err));
+        .catch((err) => {
+          alert(err.message)
+          console.error(err)});
       }        
      
      render() {
         
          return ( <div>
-            <h1>Signup</h1>
+            <h3>Signup</h3>
             <form onSubmit={this.handleSubmit}>
               <label htmlFor="firstName">First Name</label>
               <br />

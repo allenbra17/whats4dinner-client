@@ -1,6 +1,7 @@
 import * as React from "react";
 import { IFetchResponse } from "./Fetch.interface";
 import { Drink } from "./Ingred.Interface";
+import { Row, Col, Card, CardImg, CardBody, Container } from "reactstrap";
 
 interface FetchDrinksProps {
   handleFetch: (ingredient: string) => void;
@@ -13,11 +14,8 @@ interface FetchDrinksState {
 
 class FetchDrinks extends React.Component<FetchDrinksProps, FetchDrinksState> {
   baseURL = "https://www.thecocktaildb.com/api/json/v1/1/";
-  cocktailURL = `https://www.thecocktaildb.com/drink/`;
   ingredientList = `${this.baseURL}list.php?i=list`;
-  categoryList = `${this.baseURL}list.php?c=list`;
 
-  // byLetter = `${this.baseURL}search.php?f=${this.letter}`
   constructor(props: FetchDrinksProps) {
     super(props);
     this.state = { ingredData: [], drinkData: [] };
@@ -32,29 +30,35 @@ class FetchDrinks extends React.Component<FetchDrinksProps, FetchDrinksState> {
   myIngred = () => {
     return this.state.ingredData.map((drinks, index) => {
       return (
-        <div>
-          <img
-            src={`http://www.thecocktaildb.com/images/ingredients/${drinks.strIngredient1}-Small.png`}
-            className="card-img-top"
-            alt="..."
-          />
-          <button onClick={() => this.props.handleFetch(drinks.strIngredient1)}>
-            <div>
-              <h5>{drinks.strIngredient1}</h5>
-            </div>
-          </button>
-        </div>
+        <Col xs="12" md="6" lg="2">
+          <Card className="cards">
+            <CardBody>
+              <CardImg 
+              src={`http://www.thecocktaildb.com/images/ingredients/${drinks.strIngredient1}.png`}
+              alt={drinks.strIngredient1}
+              top
+              height="10%"
+              width="10%"/>
+              <button onClick={() => this.props.handleFetch(drinks.strIngredient1)}>
+                {drinks.strIngredient1}
+              </button>
+            </CardBody>
+          </Card>
+        </Col>
       );
     });
   };
+  componentDidMount() {
+    this.handleIngredFetch()
+  }
+  
   render() {
     return (
-      <>
-        <button onClick={this.handleIngredFetch}>
-          Search by Drink Ingredient
-        </button>
-        {this.state.ingredData.length > 0 ? this.myIngred() : null}
-      </>
+      <div>
+        <Container>
+          <Row>{this.myIngred()}</Row>
+          </Container>
+      </div>
     );
   }
 }
