@@ -27,13 +27,15 @@ import { ILoginResponse } from './Login.interface';
         })
         .then((res) => res.json())
         .then((data:ILoginResponse) => this.props.updateLocalStorage(data.sessionToken, data.user.role))
-        .catch((err) => console.error(err));
+        .catch((err) => {
+          alert(err.message)
+          console.error(err)});
       }        
      
      render() {
         
          return ( <div>
-            <h1>Login</h1>
+            <h3>Login</h3>
             <form onSubmit={this.handleSubmit}>
               <label htmlFor="email">Email</label>
               <br />

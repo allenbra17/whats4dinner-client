@@ -1,7 +1,15 @@
 import * as React from "react";
-import { Button, Col, Card, Row, Container } from "react-bootstrap";
 import EditDrinksModal from "../AllRecipes/EditDrinksModal";
-import EditFoodModal from "../AllRecipes/EditFoodModal"
+import EditFoodModal from "../AllRecipes/EditFoodModal";
+import {
+  Row,
+  Col,
+  Card,
+  CardImg,
+  CardBody,
+  CardTitle,
+  Container,
+} from "reactstrap";
 
 interface GetAllRecipesProps {
   sessionToken: string;
@@ -30,7 +38,7 @@ interface GetAllRecipesState {
   foodModal: boolean;
   editRating: string;
   currentEditingDrink: CurrentEditingDrink;
-  currentEditingFood:   CurrentEditingFood
+  currentEditingFood: CurrentEditingFood;
 }
 
 export interface CurrentEditingDrink {
@@ -39,19 +47,22 @@ export interface CurrentEditingDrink {
   cocktailURL: string;
   imgURL: string;
   rating: string;
-  id: string
+  id: string;
 }
 
 export interface CurrentEditingFood {
-    recipeName: string;
-    category: string;
-    recipeURL: string;
-    imgURL: string;
-    rating: string;
-    id: string
+  recipeName: string;
+  category: string;
+  recipeURL: string;
+  imgURL: string;
+  rating: string;
+  id: string;
 }
 
-class GetAllRecipes extends React.Component<GetAllRecipesProps, GetAllRecipesState> {
+class GetAllRecipes extends React.Component<
+  GetAllRecipesProps,
+  GetAllRecipesState
+> {
   constructor(props: GetAllRecipesProps) {
     super(props);
     this.state = {
@@ -81,7 +92,7 @@ class GetAllRecipes extends React.Component<GetAllRecipesProps, GetAllRecipesSta
       drinkModal: false,
       foodModal: false,
       currentEditingDrink: {} as CurrentEditingDrink,
-      currentEditingFood: {} as CurrentEditingFood
+      currentEditingFood: {} as CurrentEditingFood,
     };
   }
   toggleDrinkModal = () => {
@@ -103,24 +114,28 @@ class GetAllRecipes extends React.Component<GetAllRecipesProps, GetAllRecipesSta
   displayAllDrinks = () => {
     return this.state.allDrinksArray.map((drinks, index) => {
       return (
-        <Col>
-          <Card>
-            <a href={drinks.cocktailURL}>
-              <Card.Img
-                variant="top"
-                src={drinks.imgURL}
-                alt={drinks.cocktailName}
-                height="100px"
-                width="100px"
-              />
-            </a>
-            <Card.Body>
-              <Card.Title>{drinks.cocktailName}</Card.Title>
-              <Card.Text>-------Recipe---------</Card.Text>
-              <Button onClick={() => this.setState({ isDrinkModalOpen: true, currentEditingDrink: drinks })}>
+        <Col xs="12" md="8" lg="4">
+          <Card className="cards">
+            <CardBody>
+              <a href={drinks.cocktailURL}>
+                <CardImg
+                  variant="top"
+                  src={drinks.imgURL}
+                  alt={drinks.cocktailName}
+                />
+              </a>
+              <CardTitle>{drinks.cocktailName}</CardTitle>
+              <button
+                onClick={() =>
+                  this.setState({
+                    isDrinkModalOpen: true,
+                    currentEditingDrink: drinks,
+                  })
+                }
+              >
                 Click to Expand
-              </Button>
-            </Card.Body>
+              </button>
+            </CardBody>
           </Card>
         </Col>
       );
@@ -143,62 +158,73 @@ class GetAllRecipes extends React.Component<GetAllRecipesProps, GetAllRecipesSta
         this.setState({ allFoodArray: allFoodData });
       });
   };
-  displayMyFood = () => {
-    return this.state.allFoodArray.map((food, index) => {return (
-        <Col>
-          <Card>
-            <a href={food.recipeURL}>
-              <Card.Img
-                variant="top"
-                src={food.imgURL}
-                alt={food.recipeName}
-                height="100px"
-                width="100px"
-              />
-            </a>
-            <Card.Body>
-              <Card.Title>{food.recipeName}</Card.Title>
-              <Card.Text>-------Recipe---------</Card.Text>
-              <Button onClick={() => this.setState({ isFoodModalOpen: true, currentEditingFood: food })}>
+  displayAllFood = () => {
+    return this.state.allFoodArray.map((food, index) => {
+      return (
+        <Col xs="12" md="8" lg="4">
+          <Card className="cards">
+            <CardBody>
+              <a href={food.recipeURL}>
+                <CardImg
+                  variant="top"
+                  src={food.imgURL}
+                  alt={food.recipeName}
+                />
+              </a>
+              <CardTitle>{food.recipeName}</CardTitle>
+              <button
+                onClick={() =>
+                  this.setState({
+                    isFoodModalOpen: true,
+                    currentEditingFood: food,
+                  })
+                }
+              >
                 Click to Expand
-              </Button>
-            </Card.Body>
+              </button>
+            </CardBody>
           </Card>
         </Col>
       );
     });
   };
+  componentDidMount() {
+    this.fetchAllFood();
+    this.fetchAllDrinks();
+  }
   render() {
     return (
       <div>
-        <h1 className="title">Favorite Recipes</h1>
-        <button onClick={(e) =>{
-          this.fetchAllFood()
-            this.fetchAllDrinks()}}>Get All Recipes</button>
-        <Container>
-        <Col>
-          {this.state.allFoodArray.length > 1 ? this.displayMyFood() : null}
-        </Col>
+        <h3 className="title">All Favorite Recipes</h3>
+        <Container className="displayCards">
+          <Row className="food">
+            {this.state.allFoodArray.length > 0 ? this.displayAllFood() : null}
+          </Row>
+
+          <Row className="drinks">
+            {this.state.allDrinksArray.length > 0
+              ? this.displayAllDrinks()
+              : null}
+          </Row>
         </Container>
-        <Container>
-        <Col>
-          {this.state.allDrinksArray.length > 1 ? this.displayAllDrinks() : null}
-        </Col>
-        </Container>
-        {this.state.isDrinkModalOpen ? <EditDrinksModal
-                isDrinkModalOpen={this.state.isDrinkModalOpen}
-                toggleDrinkModal={this.toggleDrinkModal}
-                currentEditingDrink={this.state.currentEditingDrink}
-                sessionToken={this.props.sessionToken}
-                myDrinksArray={this.state.allDrinksArray}
-              />: null}
-        {this.state.isFoodModalOpen ? <EditFoodModal
-                isFoodModalOpen={this.state.isFoodModalOpen}
-                toggleFoodModal={this.toggleFoodModal}
-                currentEditingFood={this.state.currentEditingFood}
-                sessionToken={this.props.sessionToken}
-                myFoodArray={this.state.allFoodArray}
-              />: null}
+        {this.state.isDrinkModalOpen ? (
+          <EditDrinksModal
+            isDrinkModalOpen={this.state.isDrinkModalOpen}
+            toggleDrinkModal={this.toggleDrinkModal}
+            currentEditingDrink={this.state.currentEditingDrink}
+            sessionToken={this.props.sessionToken}
+            myDrinksArray={this.state.allDrinksArray}
+          />
+        ) : null}
+        {this.state.isFoodModalOpen ? (
+          <EditFoodModal
+            isFoodModalOpen={this.state.isFoodModalOpen}
+            toggleFoodModal={this.toggleFoodModal}
+            currentEditingFood={this.state.currentEditingFood}
+            sessionToken={this.props.sessionToken}
+            myFoodArray={this.state.allFoodArray}
+          />
+        ) : null}
       </div>
     );
   }

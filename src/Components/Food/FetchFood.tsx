@@ -1,6 +1,7 @@
 import * as React from "react";
 import { IFetchResponse } from "./Fetch.interface";
 import { Category } from "./Ingred.Interface";
+import { Row, Col, Card, CardImg, CardBody, Container } from "reactstrap";
 
 interface FetchFoodProps {
   handleFetch: (ingredient: string) => void;
@@ -29,27 +30,33 @@ class FetchFood extends React.Component<FetchFoodProps, FetchFoodState> {
   myIngred = () => {
     return this.state.ingredData.map((food, index) => {
       return (
-        <div>
-          <span>
-            <img src={food.strCategoryThumb} alt={food.strCategory}/>
-            <br />
-            <button onClick={() => this.props.handleFetch(food.strCategory)}>
-              {food.strCategory}
-            </button>
-          </span>
-        </div>
+        <Col xs="12" md="6" lg="2">
+          <Card className="cards">
+            <CardBody>
+              <CardImg
+                src={food.strCategoryThumb}
+                alt={food.strCategory}
+                top
+                height="10%"
+                width="10%"/>
+              <button onClick={() => this.props.handleFetch(food.strCategory)}>
+                {food.strCategory}
+              </button>
+            </CardBody>
+          </Card>
+        </Col>
       );
     });
   };
-
+  componentDidMount() {
+    this.handleIngredFetch();
+  }
   render() {
     return (
       <div>
-        {this.myIngred()}
-        <br />
-        <button onClick={this.handleIngredFetch}>
-          Search by Food Category
-        </button>
+        <Container>
+          <Row>{this.myIngred()}</Row>
+        </Container>
       </div>
     );
   }

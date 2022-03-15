@@ -1,6 +1,13 @@
 import * as React from "react";
-import stove from "../../Assets/stove.png";
-import { Button, Col, Card, Row } from "react-bootstrap";
+import {
+  Row,
+  Col,
+  Card,
+  CardImg,
+  CardBody,
+  CardTitle,
+  Container,
+} from "reactstrap";
 import EditDrinksModal from "./EditDrinksModal";
 import EditFoodModal from "./EditFoodModal"
 
@@ -104,24 +111,28 @@ class RecipeIndex extends React.Component<RecipeIndexProps, RecipeIndexState> {
   displayMyDrinks = () => {
     return this.state.myDrinksArray.map((drinks, index) => {
       return (
-        <Col>
-          <Card>
-            <a href={drinks.cocktailURL}>
-              <Card.Img
-                variant="top"
-                src={drinks.imgURL}
-                alt={drinks.cocktailName}
-                height="100px"
-                width="100px"
-              />
-            </a>
-            <Card.Body>
-              <Card.Title>{drinks.cocktailName}</Card.Title>
-              <Card.Text>-------Recipe---------</Card.Text>
-              <Button onClick={() => this.setState({ isDrinkModalOpen: true, currentEditingDrink: drinks })}>
+        <Col xs="12" md="8" lg="4" className="pb-2">
+          <Card className="cards">
+            <CardBody>
+              <a href={drinks.cocktailURL}>
+                <CardImg
+                  variant="top"
+                  src={drinks.imgURL}
+                  alt={drinks.cocktailName}
+                />
+              </a>
+              <CardTitle>{drinks.cocktailName}</CardTitle>
+              <button
+                onClick={() =>
+                  this.setState({
+                    isDrinkModalOpen: true,
+                    currentEditingDrink: drinks,
+                  })
+                }
+              >
                 Click to Expand
-              </Button>
-            </Card.Body>
+              </button>
+            </CardBody>
           </Card>
         </Col>
       );
@@ -146,45 +157,52 @@ class RecipeIndex extends React.Component<RecipeIndexProps, RecipeIndexState> {
   };
   displayMyFood = () => {
     return this.state.myFoodArray.map((food, index) => {return (
-        <Col>
-          <Card>
-            <a href={food.recipeURL}>
-              <Card.Img
-                variant="top"
-                src={food.imgURL}
-                alt={food.recipeName}
-                height="100px"
-                width="100px"
-              />
-            </a>
-            <Card.Body>
-              <Card.Title>{food.recipeName}</Card.Title>
-              <Card.Text>-------Recipe---------</Card.Text>
-              <Button onClick={() => this.setState({ isFoodModalOpen: true, currentEditingFood: food })}>
-                Click to Expand
-              </Button>
-            </Card.Body>
-          </Card>
-        </Col>
-      );
+      <Col xs="12" md="8" lg="4"  className="pb-2">
+      <Card className="cards">
+        <CardBody>
+          <a href={food.recipeURL}>
+            <CardImg
+              variant="top"
+              src={food.imgURL}
+              alt={food.recipeName}
+            />
+          </a>
+          <CardTitle>{food.recipeName}</CardTitle>
+          <button
+            onClick={() =>
+              this.setState({
+                isFoodModalOpen: true,
+                currentEditingFood: food,
+              })
+            }
+          >
+            Click to Expand
+          </button>
+        </CardBody>
+      </Card>
+    </Col>
+  );
     });
   };
+  componentDidMount() {
+    this.fetchMyDrinks()
+    this.fetchMyFood()
+  }
   render() {
     return (
       <div>
-        <h1 className="title">Whats4Dinner</h1>
-        <img src={stove} alt="" />
-        <h1 className="title">RecipeIndex</h1>
-        <h3>My Favorite Recipes</h3>
+        <Container className="displayCards">
+          <Row className="food">
+        <h3 className="title">My Favorite Recipes</h3>
+            {this.state.myFoodArray.length > 0 ? this.displayMyFood() : null}
+          </Row>
+          <Row className="drinks">
         <h3>My Favorite Drinks</h3>
-        <button onClick={this.fetchMyDrinks}>getDrinks</button>
-        <button onClick={this.fetchMyFood}>getFood</button>
-        <Col>
-          {this.state.myFoodArray.length > 1 ? this.displayMyFood() : null}
-        </Col>
-        <Col>
-          {this.state.myDrinksArray.length > 1 ? this.displayMyDrinks() : null}
-        </Col>
+            {this.state.myDrinksArray.length > 0
+              ? this.displayMyDrinks()
+              : null}
+          </Row>
+        </Container>
         {this.state.isDrinkModalOpen ? <EditDrinksModal
                 isDrinkModalOpen={this.state.isDrinkModalOpen}
                 toggleDrinkModal={this.toggleDrinkModal}

@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Button, Modal, ModalBody, ModalHeader, Form, Input } from "reactstrap";
+import { Modal, ModalBody, ModalHeader, Form, Input } from "reactstrap";
 import { CreateDrinks } from "../Drinks/Drinks.interface";
 import { CurrentEditingDrink } from "./RecipeIndex";
 
@@ -59,17 +59,19 @@ class EditDrinksModal extends React.Component<
       }),
     }).then (()=> this.props.toggleDrinkModal())
   };
+  reload=()=>window.location.reload()
   render() {
     const drinks = this.props.currentEditingDrink;
     return (
       <div>
         <Modal
+        onExit={this.reload}
         isOpen={true}
         toggle={this.props.toggleDrinkModal}>
           <ModalHeader toggle={this.props.toggleDrinkModal}></ModalHeader>
           <ModalBody>
-            <h2>{drinks.cocktailName}</h2>
-            <h3>Main Ingredient: {drinks.mainIngredient}</h3>
+            <h3>{drinks.cocktailName}</h3>
+            <h4>Main Ingredient: {drinks.mainIngredient}</h4>
             <br />
             <a href={drinks.cocktailURL}>Link to recipe</a>
             <br />
@@ -88,9 +90,9 @@ class EditDrinksModal extends React.Component<
                 placeholder="Rating"
               />
             </Form>
-              <Button onClick={()=> this.handleDrinkEdit()}>Click to Change Rating</Button>
-              <Button onClick={this.props.toggleDrinkModal}>Cancel</Button>
-              <Button onClick={this.handleDrinkDelete}>Delete Now</Button>
+              <button onClick={()=> this.handleDrinkEdit()}>Click to Change Rating</button>
+              <button onClick={this.props.toggleDrinkModal}>Cancel</button>
+              <button onClick={this.handleDrinkDelete}>Delete Now</button>
           </ModalBody>
         </Modal>
       </div>
