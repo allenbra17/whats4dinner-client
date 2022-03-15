@@ -1,38 +1,98 @@
 .App {
-  text-align: center;
+    text-align: center;
+    background-color: #C77136;
+    min-height: 100vh;
+    max-width:100vw;
+}
+.auth {
+    padding-top: 10vh;
+    display: flex ;
+    justify-content: center;
+    align-items: center;
+}
+h3 {
+    font-weight: bolder;
+    color: black;
+}
+.navlink {
+    color:#F8C365 !important;
+}
+.brand {
+    color:#F8C365 !important;
+}
+/* .links {
+    padding-left: 30vw !important;
+} */
+.container {
+    max-width: 100% !important
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.navbar {
+    position: fixed;
+    overflow: hidden;
+    width: 100%;
+    z-index: 1;
+    background-color: #56273B;
+    font-weight: bolder;
+}
+Table {
+    text-align: center;
+    background-color: #656B81;
+}
+thead{
+    color: #F8C365;
+    position: sticky;
+    top: 0;
+    padding-top: 0;
+    margin-top: 0;
+    background-color: #343240;
+}
+th {
+    border: 2px black solid;
+}
+.cards {
+    background-color: #656B81;
+    margin-bottom: 2em;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+Table td{
+    border: 1px black solid;
+    color: black;
+}
+.table {
+    caption-side: top;
+    text-align: center;
+    font-weight: bold;
+    font-size: 1.25vw;
+    text-align: center;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.displayCards {
+    flex-direction: row;
+    display: flex;
 }
 
-.App-link {
-  color: #61dafb;
+button {
+    background-color: #56273B;
+    font-weight: bold;
+    color: #F8C365;
+    padding: 1px 3px;
+
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.food {
+    padding-right: 1em;
+    height: 15%;
+}
+
+.drinks {
+    padding-left: 1em;
+    height: 16.75%;
+
+}
+Container {
+    color: #343240;
+    border-color: #656B81;
+    background-color: #F8C365, #C77136,#56273B;
+
 }
