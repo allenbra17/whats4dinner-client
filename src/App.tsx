@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
-import Assets from "./Assets/Assets";
 import Auth from "./Components/Auth/Auth";
 import DrinkIndex from "./Components/Drinks/DrinkIndex";
 import FoodIndex from "./Components/Food/FoodIndex";
@@ -50,8 +49,7 @@ const App = () => {
             element={
               isSplash ? <RecipeIndex sessionToken={sessionToken} /> : null
             }
-          ></Route>
-
+          />
           <Route
             path="/fetchFood"
             element={<FoodIndex sessionToken={sessionToken} />}
@@ -72,7 +70,6 @@ const App = () => {
             path="/getAllUsers"
             element={<GetAllUsers sessionToken={sessionToken} />}
           />
-          <Route path="/assets" element={<Assets/>} />
         </Routes>
       </React.Fragment>
     );

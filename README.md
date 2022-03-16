@@ -11,12 +11,18 @@ As well as Styling with ReactStrap and React-BootStrap
 
 ## Usage
 Upon signing up you will be direct to the screen that will eventually hold your save recipes. Once you click on search for food or drinks, you will be presented with a list of categories to choose from. Once clicked these will fetch the corresponding recipes to this category. Once this is clicked you will be given the opportunity  to rate and save said recipe. After saving they will be held in the My Recipes page.
-![Image](MyRecipes)
-![Image](fetchDrinks)
+
+![Image](./src/Assets/fetchDrinks.png)
+![Image](./src/Assets/recipes.png)
+
+![Image](./src/Assets/modal.png)
+![Image](./src/Assets/myRecipes.png)
+
 ## Admin
 There is also admin functionality to view all of the saved recipes from all users and edit as needed. They are also given access to the user data table and are free to re-secure with a new password or completely delete any user.
-![Image](all recipes)
-![Image](all users)
+
+![Image](./src/Assets/allRecipes.png)
+![Image](./src/Assets/allUsers.png)
 
 
 ## Contributing
