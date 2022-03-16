@@ -1,6 +1,7 @@
 import { Container, Image, Row } from 'react-bootstrap';
 
-let Assets = (
+const Assets = () => {
+    return (
 <div>
     <Container>
         <Row>
@@ -8,6 +9,6 @@ let Assets = (
         </Row>
     </Container>
 </div>
-)
+)}
 
 export default Assets

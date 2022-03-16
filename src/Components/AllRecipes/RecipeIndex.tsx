@@ -1,5 +1,4 @@
 import * as React from "react";
-import APIURL from '../../helpers/environment';
 import {
   Row,
   Col,
@@ -97,7 +96,7 @@ class RecipeIndex extends React.Component<RecipeIndexProps, RecipeIndexState> {
     this.setState({ isDrinkModalOpen: !this.state.isDrinkModalOpen });
   };
   fetchMyDrinks = () => {
-    fetch(`${APIURL}/drinks/mine`, {
+    fetch("http://localhost:4000/drinks/mine", {
       method: "GET",
       headers: new Headers({
         "Content-Type": "application/json",
@@ -106,11 +105,8 @@ class RecipeIndex extends React.Component<RecipeIndexProps, RecipeIndexState> {
     })
       .then((res) => res.json())
       .then((myDrinksData) => {
-        this.setState({ myDrinksArray: myDrinksData })
-      })
-      .catch((err) => {
-        alert(err.message)
-        console.error(err)});
+        this.setState({ myDrinksArray: myDrinksData });
+      });
   };
   displayMyDrinks = () => {
     return this.state.myDrinksArray.map((drinks, index) => {
@@ -147,7 +143,7 @@ class RecipeIndex extends React.Component<RecipeIndexProps, RecipeIndexState> {
   };
 
   fetchMyFood = () => {
-    fetch(`${APIURL}/food/mine`, {
+    fetch("http://localhost:4000/food/mine", {
       method: "GET",
       headers: new Headers({
         "Content-Type": "application/json",
@@ -156,11 +152,8 @@ class RecipeIndex extends React.Component<RecipeIndexProps, RecipeIndexState> {
     })
       .then((res) => res.json())
       .then((myFoodData) => {
-        this.setState({ myFoodArray: myFoodData })
-      })
-      .catch((err) => {
-        alert(err.message)
-        console.error(err)});
+        this.setState({ myFoodArray: myFoodData });
+      });
   };
   displayMyFood = () => {
     return this.state.myFoodArray.map((food, index) => {return (
@@ -199,15 +192,17 @@ class RecipeIndex extends React.Component<RecipeIndexProps, RecipeIndexState> {
     return (
       <div>
         <Container className="displayCards">
+          <Row>
           <Row className="food">
         <h3 className="title">My Favorite Recipes</h3>
             {this.state.myFoodArray.length > 0 ? this.displayMyFood() : null}
-          {/* </Row>
+          </Row>
           <Row className="drinks">
-        <h3>My Favorite Drinks</h3> */}
+        <h3>My Favorite Drinks</h3>
             {this.state.myDrinksArray.length > 0
               ? this.displayMyDrinks()
               : null}
+          </Row>
           </Row>
         </Container>
         {this.state.isDrinkModalOpen ? <EditDrinksModal
