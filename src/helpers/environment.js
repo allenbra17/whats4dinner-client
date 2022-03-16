@@ -6,5 +6,5 @@ switch (window.location.hostname) {
         break;
 
         case 'allenbra17-w4d-client.herokuapp.com':
-            APIURL = 'https://allenbra17-w4d.herokuapp.com/'
+            APIURL = 'https://allenbra17-w4d-client.herokuapp.com/'
 }
