@@ -8,6 +8,7 @@ import {
   CardTitle,
   Container,
 } from "reactstrap";
+import APIURL from "../../helpers/environment";
 import EditDrinksModal from "./EditDrinksModal";
 import EditFoodModal from "./EditFoodModal"
 
@@ -96,7 +97,7 @@ class RecipeIndex extends React.Component<RecipeIndexProps, RecipeIndexState> {
     this.setState({ isDrinkModalOpen: !this.state.isDrinkModalOpen });
   };
   fetchMyDrinks = () => {
-    fetch("http://localhost:4000/drinks/mine", {
+    fetch(`${APIURL}/drinks/mine`, {
       method: "GET",
       headers: new Headers({
         "Content-Type": "application/json",
@@ -143,7 +144,7 @@ class RecipeIndex extends React.Component<RecipeIndexProps, RecipeIndexState> {
   };
 
   fetchMyFood = () => {
-    fetch("http://localhost:4000/food/mine", {
+    fetch(`${APIURL}/food/mine`, {
       method: "GET",
       headers: new Headers({
         "Content-Type": "application/json",
