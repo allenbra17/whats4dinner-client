@@ -5,6 +5,6 @@ switch (window.location.hostname) {
         APIURL = 'http://localhost:4000';
         break;
 
-        case 'allenbra17-w4d-client.herokuapp.com':
+        case 'git.heroku.com/allenbra17-w4d-client.git':
             APIURL = 'https://allenbra17-w4d-client.herokuapp.com/'
 }
