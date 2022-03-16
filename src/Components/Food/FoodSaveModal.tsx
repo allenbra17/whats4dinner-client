@@ -44,7 +44,7 @@ class FoodSaveModal extends React.Component<
     e.preventDefault();
     this.props.toggleModal();
 
-    fetch(`${APIURL}food/create`, {
+    fetch(`${APIURL}/food/create`, {
       method: "POST",
       body: JSON.stringify({
         recipeName: this.state.createFood.recipeName,
@@ -59,7 +59,9 @@ class FoodSaveModal extends React.Component<
       }),
     })
       .then((res) => res.json())
-      .catch((err) => console.error(err));
+      .catch((err) => {
+        alert(err.message)
+        console.error(err)});
   };
   render() {
     return (

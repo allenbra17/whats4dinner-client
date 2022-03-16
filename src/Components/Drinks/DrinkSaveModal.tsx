@@ -53,7 +53,9 @@ class DrinkSaveModal extends React.Component<
       }),
     })
       .then((res) => res.json())
-      .catch((err) => console.error(err));
+      .catch((err) => {
+        alert(err.message)
+        console.error(err)});
   };
   render() {
     return (

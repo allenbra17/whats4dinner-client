@@ -57,6 +57,9 @@ class EditFoodModal extends React.Component<
         Authorization: this.props.sessionToken,
       }),
     }).then (()=> this.props.toggleFoodModal())
+    .catch((err) => {
+      alert(err.message)
+      console.error(err)});
   };
   reload=()=>window.location.reload()
   render() {

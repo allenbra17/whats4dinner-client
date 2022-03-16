@@ -48,7 +48,9 @@ class EditDrinksModal extends React.Component<
       }),
     })
     .then(()=> this.props.toggleDrinkModal())
-    .catch((err) => console.error(err));
+    .catch((err) => {
+      alert(err.message)
+      console.error(err)});
   };
   handleDrinkDelete = () => {
     debugger
@@ -59,6 +61,9 @@ class EditDrinksModal extends React.Component<
         Authorization: this.props.sessionToken,
       }),
     }).then (()=> this.props.toggleDrinkModal())
+    .catch((err) => {
+      alert(err.message)
+      console.error(err)});
   };
   reload=()=>window.location.reload()
   render() {

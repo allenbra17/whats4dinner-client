@@ -106,8 +106,11 @@ class RecipeIndex extends React.Component<RecipeIndexProps, RecipeIndexState> {
     })
       .then((res) => res.json())
       .then((myDrinksData) => {
-        this.setState({ myDrinksArray: myDrinksData });
-      });
+        this.setState({ myDrinksArray: myDrinksData })
+      })
+      .catch((err) => {
+        alert(err.message)
+        console.error(err)});
   };
   displayMyDrinks = () => {
     return this.state.myDrinksArray.map((drinks, index) => {
@@ -153,8 +156,11 @@ class RecipeIndex extends React.Component<RecipeIndexProps, RecipeIndexState> {
     })
       .then((res) => res.json())
       .then((myFoodData) => {
-        this.setState({ myFoodArray: myFoodData });
-      });
+        this.setState({ myFoodArray: myFoodData })
+      })
+      .catch((err) => {
+        alert(err.message)
+        console.error(err)});
   };
   displayMyFood = () => {
     return this.state.myFoodArray.map((food, index) => {return (
