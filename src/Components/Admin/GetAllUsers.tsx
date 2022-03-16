@@ -1,4 +1,5 @@
 import * as React from "react";
+import APIURL from '../../helpers/environment';
 import { Modal, ModalBody, ModalHeader, Table, Form, Input } from "reactstrap";
 
 interface GetAllUsersProps {

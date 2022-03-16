@@ -8,3 +8,5 @@ switch (window.location.hostname) {
         case 'git.heroku.com/allenbra17-w4d-client.git':
             APIURL = 'https://allenbra17-w4d-client.herokuapp.com/'
 }
+
+export default APIURL

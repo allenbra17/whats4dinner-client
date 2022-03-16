@@ -1,4 +1,5 @@
 import * as React from 'react';
+import APIURL from '../../helpers/environment';
 import { ISignup } from './Signup.interface';
  interface SignupProps {
   updateLocalStorage: (newToken: string, adminStatus: string) => void
