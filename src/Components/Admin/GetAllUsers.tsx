@@ -72,7 +72,7 @@ class GetAllUsers extends React.Component<GetAllUsersProps, GetAllUsersState> {
   };
   displayGetAllUsers = () => {
     return this.state.GetAllUsersArray.map((users, index) => {
-      return this.state.GetAllUsersArray.length > 1 ? (
+      return this.state.GetAllUsersArray.length > 0 ? (
         <tr key={index}>
           <td scope="row">{users.id}</td>
           <td>{users.firstName}</td>
