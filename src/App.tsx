@@ -72,7 +72,7 @@ const App = () => {
             path="/getAllUsers"
             element={<GetAllUsers sessionToken={sessionToken} />}
           />
-          <Route path="/assets" element={Assets} />
+          <Route path="/assets" element={<Assets/>} />
         </Routes>
       </React.Fragment>
     );
