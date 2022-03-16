@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
-import stove from "./Assets/stove.png";
+import Assets from "./Assets/Assets";
 import Auth from "./Components/Auth/Auth";
 import DrinkIndex from "./Components/Drinks/DrinkIndex";
 import FoodIndex from "./Components/Food/FoodIndex";
@@ -32,7 +32,6 @@ const App = () => {
     localStorage.setItem("role", adminStatus);
     setIsAdmin(adminStatus === "admin" ? true : false);
   };
-  
 
   const adminPages = () => {
     return (
@@ -42,34 +41,38 @@ const App = () => {
           logout={logout}
           isAdmin={isAdmin}
         />
-        <br/>
-        <br/>
-        <br/>
+        <br />
+        <br />
+        <br />
         <Routes>
           <Route
-          path="/*"
-          element={isSplash ? <RecipeIndex sessionToken={sessionToken} />: null}></Route>
-
-          <Route 
-            path="/fetchFood"
-            element={<FoodIndex sessionToken={sessionToken} /> }
+            path="/*"
+            element={
+              isSplash ? <RecipeIndex sessionToken={sessionToken} /> : null
+            }
           ></Route>
+
+          <Route
+            path="/fetchFood"
+            element={<FoodIndex sessionToken={sessionToken} />}
+          />
           <Route
             path="/fetchDrinks"
             element={<DrinkIndex sessionToken={sessionToken} />}
-          ></Route>
+          />
           <Route
             path="/getMyRecipes"
             element={<RecipeIndex sessionToken={sessionToken} />}
-          ></Route>
+          />
           <Route
             path="/getAllRecipes"
             element={<GetAllRecipes sessionToken={sessionToken} />}
-          ></Route>
+          />
           <Route
             path="/getAllUsers"
             element={<GetAllUsers sessionToken={sessionToken} />}
-          ></Route>
+          />
+          <Route path="/assets" element={Assets} />
         </Routes>
       </React.Fragment>
     );
@@ -82,22 +85,22 @@ const App = () => {
           logout={logout}
           isAdmin={isAdmin}
         />
-        <br/>
-        <br/>
-        <br/>
+        <br />
+        <br />
+        <br />
         <Routes>
           <Route
             path="/fetchFood"
             element={<FoodIndex sessionToken={sessionToken} />}
-          ></Route>
+          />
           <Route
             path="/fetchDrinks"
             element={<DrinkIndex sessionToken={sessionToken} />}
-          ></Route>
+          />
           <Route
             path="/getMyRecipes"
             element={<RecipeIndex sessionToken={sessionToken} />}
-          ></Route>
+          />
         </Routes>
       </div>
     ) : (
