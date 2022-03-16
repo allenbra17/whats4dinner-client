@@ -38,7 +38,7 @@ class EditFoodModal extends React.Component<
     };
   }
   handleFoodEdit = async () => {
-    fetch(`${APIURL}/drinks/${this.props.currentEditingFood.id}`, {
+    fetch(`${APIURL}/food/${this.props.currentEditingFood.id}`, {
       method: "PUT",
       body: JSON.stringify({ rating: ~~this.state.editRating }),
       headers: new Headers({

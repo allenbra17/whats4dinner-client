@@ -100,7 +100,7 @@ class GetAllRecipes extends React.Component<
     this.setState({ isDrinkModalOpen: !this.state.isDrinkModalOpen });
   };
   fetchAllDrinks = () => {
-    fetch(`${APIURL}admin/drinks`, {
+    fetch(`${APIURL}/admin/drinks`, {
       method: "GET",
       headers: new Headers({
         "Content-Type": "application/json",
