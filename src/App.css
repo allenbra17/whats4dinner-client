@@ -21,7 +21,8 @@ h3 {
     color:#F8C365 !important;
 }
 .container {
-    max-width: 100% !important
+    max-width: 100% !important;
+    justify-content: center;
 }
 
 .navbar {
