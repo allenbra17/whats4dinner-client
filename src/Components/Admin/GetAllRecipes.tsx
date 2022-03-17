@@ -115,7 +115,7 @@ class GetAllRecipes extends React.Component<
   displayAllDrinks = () => {
     return this.state.allDrinksArray.map((drinks, index) => {
       return (
-        <Col xs="6" md="3" lg="2" className="pb-2">
+        <Col xs="12" md="6" lg="4" className="pb-2">
           <Card className="cards">
             <CardBody>
               <a href={drinks.cocktailURL}>
@@ -162,7 +162,7 @@ class GetAllRecipes extends React.Component<
   displayAllFood = () => {
     return this.state.allFoodArray.map((food, index) => {
       return (
-        <Col xs="12" md="8" lg="4">
+        <Col xs="12" md="6" lg="4" className="pb-2">
           <Card className="cards">
             <CardBody>
               <a href={food.recipeURL}>
