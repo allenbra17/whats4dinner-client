@@ -198,11 +198,10 @@ class GetAllRecipes extends React.Component<
       <div>
         <h3 className="title">All Favorite Recipes</h3>
         <Container className="displayCards">
-          <Row className="food">
+          <Row>
             {this.state.allFoodArray.length > 0 ? this.displayAllFood() : null}
           </Row>
-          <Row className="space"></Row>
-          <Row className="drinks">
+          <Row>
             {this.state.allDrinksArray.length > 0
               ? this.displayAllDrinks()
               : null}

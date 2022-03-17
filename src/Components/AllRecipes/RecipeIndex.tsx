@@ -193,12 +193,11 @@ class RecipeIndex extends React.Component<RecipeIndexProps, RecipeIndexState> {
     return (
       <div>
         <Container className="displayCards">
-          <Row className="food">
+          <Row>
         <h3 className="title">My Favorite Recipes</h3>
             {this.state.myFoodArray.length > 0 ? this.displayMyFood() : null}
             </Row>
-            <Row className="space"></Row>
-          <Row className="drinks">
+          <Row>
         <h3>My Favorite Drinks</h3>
             {this.state.myDrinksArray.length > 0
               ? this.displayMyDrinks()
