@@ -60,7 +60,7 @@ Table td{
     caption-side: top;
     text-align: center;
     font-weight: bold;
-    font-size: 1.25vw;
+    /* font-size: 1.25vw; */
     text-align: center;
 }
 
