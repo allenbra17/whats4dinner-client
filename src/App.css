@@ -1,7 +1,7 @@
 .App {
     text-align: center;
     background-color: #C77136;
-    background-size: cover;
+    min-height: 100vh;
     max-width:100vw;
 }
 .auth {
@@ -32,7 +32,10 @@ h3 {
     background-color: #56273B;
     font-weight: bolder;
 }
-
+Table {
+    text-align: center;
+    background-color: #656B81;
+}
 thead{
     color: #F8C365;
     position: sticky;
@@ -41,11 +44,9 @@ thead{
     margin-top: 0;
     background-color: #343240;
 }
-
 th {
     border: 2px black solid;
 }
-
 .cards {
     background-color: #656B81;
     margin-bottom: 2em;
@@ -55,15 +56,12 @@ Table td{
     border: 1px black solid;
     color: black;
 }
-
 .table {
     caption-side: top;
     text-align: center;
     font-weight: bold;
-    /* font-size: 1.25vw; */
+    font-size: 1.25vw;
     text-align: center;
-    width:100vw;
-    background-color: #656B81;
 }
 
 .displayCards {
@@ -76,11 +74,17 @@ button {
     font-weight: bold;
     color: #F8C365;
     padding: 1px 3px;
+
 }
 
-.row {
-    height: 15vh;
-    padding-left: 1em;
+.food {
     padding-right: 1em;
-    justify-content: center;
+    height: 15vh;
+    width: 50%
+}
+
+.drinks {
+    padding-left: 1em;
+    height: 15vh;
+    width: 50%
 }
