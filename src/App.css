@@ -1,7 +1,7 @@
 .App {
     text-align: center;
     background-color: #C77136;
-    min-height: 100vh;
+    min-height: 100%;
     max-width:100vw;
 }
 .auth {

@@ -33,8 +33,13 @@ class FetchFood extends React.Component<FetchFoodProps, FetchFoodState> {
         <Col xs="6" md="3" lg="2" className="pb-2">
           <Card className="cards">
             <CardBody>
-              <CardImg src={food.strCategoryThumb} alt={food.strCategory} top />
-              <button onClick={() => this.props.handleFetch(food.strCategory)}>
+              <CardImg
+              src={food.strCategoryThumb}
+              alt={food.strCategory}
+              top
+              />
+              <button
+              onClick={() => this.props.handleFetch(food.strCategory)}>
                 {food.strCategory}
               </button>
             </CardBody>

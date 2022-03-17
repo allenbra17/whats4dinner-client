@@ -39,8 +39,9 @@ class FetchDrinks extends React.Component<FetchDrinksProps, FetchDrinksState> {
                 top
               />
               <button
-                onClick={() => this.props.handleFetch(drinks.strIngredient1)}
-              ></button>
+                onClick={() => this.props.handleFetch(drinks.strIngredient1)}>
+                  {drinks.strIngredient1}
+              </button>
             </CardBody>
           </Card>
         </Col>

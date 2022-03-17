@@ -103,7 +103,7 @@ class DrinkSaveModal extends React.Component<
               >
                 Click to Save
               </button>
-              <button onClick={this.props.toggleModal}>Cancel</button>
+              <button onClick={this.modalOpen}>Cancel</button>
             </Form>
           </ModalBody>
         </Modal>

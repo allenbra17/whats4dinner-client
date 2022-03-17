@@ -96,7 +96,7 @@ class FoodTable extends React.Component<FoodTableProps, FoodTableState> {
         <Container>
           <Row>{this.state.foodData.length > 0 ? this.myFood() : null}</Row>
         </Container>
-        {this.state.foodData.length == 0 ? <FetchFood handleFetch={this.handleFetch} /> : null}
+        {this.state.foodData.length === 0 ? <FetchFood handleFetch={this.handleFetch} /> : null}
       </div>
     );
   }
