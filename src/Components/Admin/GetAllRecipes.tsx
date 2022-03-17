@@ -201,7 +201,7 @@ class GetAllRecipes extends React.Component<
           <Row className="food">
             {this.state.allFoodArray.length > 0 ? this.displayAllFood() : null}
           </Row>
-
+          <Row className="space"></Row>
           <Row className="drinks">
             {this.state.allDrinksArray.length > 0
               ? this.displayAllDrinks()

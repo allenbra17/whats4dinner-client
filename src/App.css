@@ -78,13 +78,15 @@ button {
 }
 
 .food {
-    padding-right: 1em;
     height: 15vh;
-    width: 50%
+    width: 49.5%
 }
 
 .drinks {
-    padding-left: 1em;
-    height: 1vh;
-    width: 50%
+    height: 15vh;
+    width: 49.5%
+}
+.space{
+    width:1%;
+    height: 100%;
 }
