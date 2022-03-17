@@ -72,6 +72,7 @@ class GetAllUsers extends React.Component<GetAllUsersProps, GetAllUsersState> {
         this.setState({ GetAllUsersArray: GetAllUsersData });
       });
   };
+  
   displayGetAllUsers = () => {
     return this.state.GetAllUsersArray.map((users, index) => {
       return this.state.GetAllUsersArray.length > 0 ? (
@@ -165,6 +166,7 @@ class GetAllUsers extends React.Component<GetAllUsersProps, GetAllUsersState> {
               />
               <p>Update User Role</p>
               <Input
+              value={this.state.newRole}
                 onChange={(e) => this.setState({ newRole: e.target.value })}
                 type="select">
                 <option value="" disabled selected>Choose a New Role</option>
