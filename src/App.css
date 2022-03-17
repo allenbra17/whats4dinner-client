@@ -78,7 +78,9 @@ button {
     padding: 1px 3px;
 }
 
-.Row {
+.row {
     height: 15vh;
-    padding: auto 1em auto 1em;
+    padding-left: 1em;
+    padding-right: 1em;
+    justify-content: center;
 }
