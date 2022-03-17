@@ -79,11 +79,12 @@ button {
 
 .food {
     padding-right: 1em;
-    height: 15%;
+    height: 15vh;
+    width: 50%
 }
 
 .drinks {
     padding-left: 1em;
-    height: 15%;
-
+    height: 1vh;
+    width: 50%
 }
