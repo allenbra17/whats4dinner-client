@@ -62,6 +62,7 @@ Table td{
     font-weight: bold;
     /* font-size: 1.25vw; */
     text-align: center;
+    width:100%;
 }
 
 .displayCards {

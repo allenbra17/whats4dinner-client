@@ -1,5 +1,5 @@
 import * as React from "react";
-import APIURL from '../../helpers/environment';
+import APIURL from "../../helpers/environment";
 import { Modal, ModalBody, ModalHeader, Table, Form, Input } from "reactstrap";
 
 interface GetAllUsersProps {
@@ -96,32 +96,29 @@ class GetAllUsers extends React.Component<GetAllUsersProps, GetAllUsersState> {
     });
   };
   handlePasswordUpdate = async () => {
-    fetch(
-      `${APIURL}/admin/users/${this.state.currentUpdatingUser.id}`,
-      {
-        method: "PUT",
-        body: JSON.stringify({ password: this.state.newPassword }),
-        headers: new Headers({
-          "Content-Type": "application/json",
-          Authorization: this.props.sessionToken,
-        }),
-      }
-    )
+    fetch(`${APIURL}/admin/users/${this.state.currentUpdatingUser.id}`, {
+      method: "PUT",
+      body: JSON.stringify({ password: this.state.newPassword }),
+      headers: new Headers({
+        "Content-Type": "application/json",
+        Authorization: this.props.sessionToken,
+      }),
+    })
       .then(() => this.toggleUserModal())
-      .catch((err) => console.error(err));
+      .catch((err) => {
+        alert(err.message);
+        console.error(err);
+      });
   };
   handleUserDelete = () => {
     debugger;
-    fetch(
-      `${APIURL}/admin/users/${this.state.currentUpdatingUser.id}`,
-      {
-        method: "DELETE",
-        headers: new Headers({
-          "Content-Type": "application/json",
-          Authorization: this.props.sessionToken,
-        }),
-      }
-    ).then(() => this.toggleUserModal());
+    fetch(`${APIURL}/admin/users/${this.state.currentUpdatingUser.id}`, {
+      method: "DELETE",
+      headers: new Headers({
+        "Content-Type": "application/json",
+        Authorization: this.props.sessionToken,
+      }),
+    }).then(() => this.toggleUserModal());
   };
 
   componentDidMount() {
