@@ -93,8 +93,10 @@ class RecipeIndex extends React.Component<RecipeIndexProps, RecipeIndexState> {
       currentEditingFood: {} as CurrentEditingFood
     };
   }
+  reload = () => window.location.reload();
   toggleDrinkModal = () => {
     this.setState({ isDrinkModalOpen: !this.state.isDrinkModalOpen });
+    this.reload()
   };
   fetchMyDrinks = () => {
     fetch(`${APIURL}/drinks/mine`, {
@@ -141,6 +143,7 @@ class RecipeIndex extends React.Component<RecipeIndexProps, RecipeIndexState> {
   };
   toggleFoodModal = () => {
     this.setState({ isFoodModalOpen: !this.state.isFoodModalOpen });
+    this.reload()
   };
 
   fetchMyFood = () => {

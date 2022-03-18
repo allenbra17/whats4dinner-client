@@ -56,8 +56,10 @@ class GetAllUsers extends React.Component<GetAllUsersProps, GetAllUsersState> {
       userModal: false,
     };
   }
+  reload = () => window.location.reload();
   toggleUserModal = () => {
     this.setState({ isUserModalOpen: !this.state.isUserModalOpen });
+    this.reload()
   };
   fetchGetAllUsers = () => {
     fetch(`${APIURL}/admin/users`, {
@@ -127,7 +129,7 @@ class GetAllUsers extends React.Component<GetAllUsersProps, GetAllUsersState> {
   componentDidMount() {
     this.fetchGetAllUsers();
   }
-  reload = () => window.location.reload();
+
   render() {
     const user = this.state.currentUpdatingUser;
     return (
@@ -145,7 +147,6 @@ class GetAllUsers extends React.Component<GetAllUsersProps, GetAllUsersState> {
           <tbody>{this.displayGetAllUsers()}</tbody>
         </Table>
         <Modal
-          onExit={this.reload}
           isOpen={this.state.isUserModalOpen}
           toggle={this.toggleUserModal}
         >

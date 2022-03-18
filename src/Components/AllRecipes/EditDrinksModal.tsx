@@ -65,13 +65,11 @@ class EditDrinksModal extends React.Component<
       alert(err.message)
       console.error(err)});
   };
-  reload=()=>window.location.reload()
   render() {
     const drinks = this.props.currentEditingDrink;
     return (
       <div>
         <Modal
-        onExit={this.reload}
         isOpen={true}
         toggle={this.props.toggleDrinkModal}>
           <ModalHeader toggle={this.props.toggleDrinkModal}></ModalHeader>
