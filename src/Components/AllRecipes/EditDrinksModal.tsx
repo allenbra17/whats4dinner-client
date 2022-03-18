@@ -63,7 +63,6 @@ class EditDrinksModal extends React.Component<
     .catch((err) => {
       alert(err.message)
       console.error(err)});
-      console.log(this.props.currentEditingDrink)
   };
   render() {
     const drinks = this.props.currentEditingDrink;
@@ -96,7 +95,8 @@ class EditDrinksModal extends React.Component<
             </Form>
               <button onClick={()=> this.handleDrinkEdit()}>Click to Change Rating</button>
               <button onClick={this.props.toggleDrinkModal}>Cancel</button>
-              <button onClick={this.handleDrinkDelete}>Delete</button>
+              <button onClick={()=> console.log(this.props.currentEditingDrink)
+}>Delete</button>
           </ModalBody>
         </Modal>
       </div>
