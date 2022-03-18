@@ -53,7 +53,6 @@ class EditDrinksModal extends React.Component<
       console.error(err)});
   };
   handleDrinkDelete = () => {
-    debugger
     fetch(`${APIURL}/drinks/${this.props.currentEditingDrink.id}`, {
       method: "DELETE",
       headers: new Headers({

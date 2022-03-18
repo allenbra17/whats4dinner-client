@@ -87,6 +87,12 @@ const App = () => {
         <br />
         <Routes>
           <Route
+            path="/*"
+            element={
+              isSplash ? <RecipeIndex sessionToken={sessionToken} /> : null
+            }
+          />
+          <Route
             path="/fetchFood"
             element={<FoodIndex sessionToken={sessionToken} />}
           />
