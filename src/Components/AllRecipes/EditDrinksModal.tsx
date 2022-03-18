@@ -52,17 +52,21 @@ class EditDrinksModal extends React.Component<
       alert(err.message)
       console.error(err)});
   };
-  handleDrinkDelete = () => {
+  handleDrinkDelete = async () => {
+    try {
+      const res = await
     fetch(`${APIURL}/drinks/${this.props.currentEditingDrink.id}`, {
       method: "DELETE",
       headers: new Headers({
         "Content-Type": "application/json",
         Authorization: this.props.sessionToken,
       }),
-    }).then (()=> this.props.toggleDrinkModal())
-    .catch((err) => {
-      alert(err.message)
-      console.error(err)});
+    }
+    )
+  }catch (error) {
+      alert( error )
+      console.error(error)}
+      ()=> this.props.toggleDrinkModal()
   };
   render() {
     const drinks = this.props.currentEditingDrink;
@@ -95,7 +99,7 @@ class EditDrinksModal extends React.Component<
             </Form>
               <button onClick={()=> this.handleDrinkEdit()}>Click to Change Rating</button>
               <button onClick={this.props.toggleDrinkModal}>Cancel</button>
-              <button onClick={()=> console.log(this.props.currentEditingDrink.id)
+              <button onClick={()=> this.handleDrinkDelete()
 }>Delete</button>
           </ModalBody>
         </Modal>

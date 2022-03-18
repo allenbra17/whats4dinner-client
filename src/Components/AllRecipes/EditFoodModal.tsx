@@ -49,26 +49,27 @@ class EditFoodModal extends React.Component<
       .then(()=> this.props.toggleFoodModal())
       .catch((err) => console.error(err));
   };
-  handleFoodDelete = () => {
+  handleFoodDelete = async () => {
+    try {
+      const res = await
     fetch(`${APIURL}/food/${this.props.currentEditingFood.id}`, {
       method: "DELETE",
       headers: new Headers({
         "Content-Type": "application/json",
         Authorization: this.props.sessionToken,
       }),
-    }).then (()=> this.props.toggleFoodModal())
-    .catch((err) => {
-      alert(err.message)
-      console.error(err)});
-      console.log(this.props.currentEditingFood)
+    }
+    )
+  }catch (error) {
+      alert( error )
+      console.error(error)}
+      ()=> this.props.toggleFoodModal()
   };
-  reload=()=>window.location.reload()
   render() {
     const food = this.props.currentEditingFood;
     return (
       <div>
         <Modal
-        onExit={this.reload}
           isOpen={this.props.isFoodModalOpen}
           toggle={this.props.toggleFoodModal}>
           <ModalHeader toggle={this.props.toggleFoodModal}></ModalHeader>
@@ -95,7 +96,7 @@ class EditFoodModal extends React.Component<
             </Form>
               <button onClick={()=>this.handleFoodEdit()}>Click to Change Rating</button>
               <button onClick={this.props.toggleFoodModal}>Cancel</button>
-              <button onClick={()=>       console.log(this.props.currentEditingFood.id)}>Delete</button>
+              <button onClick={()=>this.handleFoodDelete()}>Delete</button>
           </ModalBody>
         </Modal>
       </div>
