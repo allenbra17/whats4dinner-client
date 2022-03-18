@@ -95,7 +95,7 @@ class EditDrinksModal extends React.Component<
             </Form>
               <button onClick={()=> this.handleDrinkEdit()}>Click to Change Rating</button>
               <button onClick={this.props.toggleDrinkModal}>Cancel</button>
-              <button onClick={()=> console.log(this.props.currentEditingDrink)
+              <button onClick={()=> console.log(this.props.currentEditingDrink.id)
 }>Delete</button>
           </ModalBody>
         </Modal>

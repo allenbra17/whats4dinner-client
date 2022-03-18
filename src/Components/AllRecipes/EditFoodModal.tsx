@@ -95,7 +95,7 @@ class EditFoodModal extends React.Component<
             </Form>
               <button onClick={()=>this.handleFoodEdit()}>Click to Change Rating</button>
               <button onClick={this.props.toggleFoodModal}>Cancel</button>
-              <button onClick={()=>       console.log(this.props.currentEditingFood)}>Delete</button>
+              <button onClick={()=>       console.log(this.props.currentEditingFood.id)}>Delete</button>
           </ModalBody>
         </Modal>
       </div>
