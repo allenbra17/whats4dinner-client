@@ -63,6 +63,7 @@ class EditDrinksModal extends React.Component<
     .catch((err) => {
       alert(err.message)
       console.error(err)});
+      console.log(this.props.currentEditingDrink)
   };
   render() {
     const drinks = this.props.currentEditingDrink;

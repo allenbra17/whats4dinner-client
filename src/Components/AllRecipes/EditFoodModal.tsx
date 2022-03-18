@@ -60,6 +60,7 @@ class EditFoodModal extends React.Component<
     .catch((err) => {
       alert(err.message)
       console.error(err)});
+      console.log(this.props.currentEditingFood)
   };
   reload=()=>window.location.reload()
   render() {
