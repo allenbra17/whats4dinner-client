@@ -66,7 +66,7 @@ class EditDrinksModal extends React.Component<
   }catch (error) {
       alert( error )
       console.error(error)}
-      ()=> this.props.toggleDrinkModal()
+      this.props.toggleDrinkModal()
   };
   render() {
     const drinks = this.props.currentEditingDrink;

@@ -63,7 +63,7 @@ class EditFoodModal extends React.Component<
   }catch (error) {
       alert( error )
       console.error(error)}
-      ()=> this.props.toggleFoodModal()
+      this.props.toggleFoodModal()
   };
   render() {
     const food = this.props.currentEditingFood;
