@@ -30,17 +30,17 @@ class FetchDrinks extends React.Component<FetchDrinksProps, FetchDrinksState> {
   myIngred = () => {
     return this.state.ingredData.map((drinks, index) => {
       return (
-        <Col xs="12" md="6" lg="2">
+        <Col xs="6" md="3" lg="2" className="pb-2">
           <Card className="cards">
             <CardBody>
-              <CardImg 
-              src={`http://www.thecocktaildb.com/images/ingredients/${drinks.strIngredient1}.png`}
-              alt={drinks.strIngredient1}
-              top
-              height="10%"
-              width="10%"/>
-              <button onClick={() => this.props.handleFetch(drinks.strIngredient1)}>
-                {drinks.strIngredient1}
+              <CardImg
+                src={`http://www.thecocktaildb.com/images/ingredients/${drinks.strIngredient1}.png`}
+                alt={drinks.strIngredient1}
+                top
+              />
+              <button
+                onClick={() => this.props.handleFetch(drinks.strIngredient1)}>
+                  {drinks.strIngredient1}
               </button>
             </CardBody>
           </Card>
@@ -49,15 +49,15 @@ class FetchDrinks extends React.Component<FetchDrinksProps, FetchDrinksState> {
     });
   };
   componentDidMount() {
-    this.handleIngredFetch()
+    this.handleIngredFetch();
   }
-  
+
   render() {
     return (
       <div>
         <Container>
           <Row>{this.myIngred()}</Row>
-          </Container>
+        </Container>
       </div>
     );
   }

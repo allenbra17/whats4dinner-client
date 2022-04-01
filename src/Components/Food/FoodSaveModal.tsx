@@ -1,5 +1,6 @@
 import * as React from "react";
 import { CurrentSelectedFood } from "./FoodTable";
+import APIURL from '../../helpers/environment';
 import {
   Modal,
   ModalBody,
@@ -43,7 +44,7 @@ class FoodSaveModal extends React.Component<
     e.preventDefault();
     this.props.toggleModal();
 
-    fetch("http://localhost:4000/food/create", {
+    fetch(`${APIURL}/food/create`, {
       method: "POST",
       body: JSON.stringify({
         recipeName: this.state.createFood.recipeName,
@@ -58,7 +59,9 @@ class FoodSaveModal extends React.Component<
       }),
     })
       .then((res) => res.json())
-      .catch((err) => console.error(err));
+      .catch((err) => {
+        alert(err.message)
+        console.error(err)});
   };
   render() {
     return (
@@ -103,7 +106,7 @@ class FoodSaveModal extends React.Component<
               >
                 Click to Save
               </button>
-              <button onClick={this.props.toggleModal}>Cancel</button>
+              <button onClick={this.modalOpen}>Cancel</button>
             </Form>
           </ModalBody>
         </Modal>

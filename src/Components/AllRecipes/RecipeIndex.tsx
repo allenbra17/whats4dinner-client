@@ -8,6 +8,7 @@ import {
   CardTitle,
   Container,
 } from "reactstrap";
+import APIURL from "../../helpers/environment";
 import EditDrinksModal from "./EditDrinksModal";
 import EditFoodModal from "./EditFoodModal"
 
@@ -92,11 +93,13 @@ class RecipeIndex extends React.Component<RecipeIndexProps, RecipeIndexState> {
       currentEditingFood: {} as CurrentEditingFood
     };
   }
+  reload = () => window.location.reload();
   toggleDrinkModal = () => {
     this.setState({ isDrinkModalOpen: !this.state.isDrinkModalOpen });
+    this.reload()
   };
   fetchMyDrinks = () => {
-    fetch("http://localhost:4000/drinks/mine", {
+    fetch(`${APIURL}/drinks/mine`, {
       method: "GET",
       headers: new Headers({
         "Content-Type": "application/json",
@@ -111,7 +114,7 @@ class RecipeIndex extends React.Component<RecipeIndexProps, RecipeIndexState> {
   displayMyDrinks = () => {
     return this.state.myDrinksArray.map((drinks, index) => {
       return (
-        <Col xs="12" md="8" lg="4" className="pb-2">
+        <Col xs="12" md="6" lg="4" className="pb-2">
           <Card className="cards">
             <CardBody>
               <a href={drinks.cocktailURL}>
@@ -140,10 +143,11 @@ class RecipeIndex extends React.Component<RecipeIndexProps, RecipeIndexState> {
   };
   toggleFoodModal = () => {
     this.setState({ isFoodModalOpen: !this.state.isFoodModalOpen });
+    this.reload()
   };
 
   fetchMyFood = () => {
-    fetch("http://localhost:4000/food/mine", {
+    fetch(`${APIURL}/food/mine`, {
       method: "GET",
       headers: new Headers({
         "Content-Type": "application/json",
@@ -157,7 +161,7 @@ class RecipeIndex extends React.Component<RecipeIndexProps, RecipeIndexState> {
   };
   displayMyFood = () => {
     return this.state.myFoodArray.map((food, index) => {return (
-      <Col xs="12" md="8" lg="4"  className="pb-2">
+      <Col xs="12" md="6" lg="4" className="pb-2">
       <Card className="cards">
         <CardBody>
           <a href={food.recipeURL}>
@@ -195,7 +199,7 @@ class RecipeIndex extends React.Component<RecipeIndexProps, RecipeIndexState> {
           <Row className="food">
         <h3 className="title">My Favorite Recipes</h3>
             {this.state.myFoodArray.length > 0 ? this.displayMyFood() : null}
-          </Row>
+            </Row>
           <Row className="drinks">
         <h3>My Favorite Drinks</h3>
             {this.state.myDrinksArray.length > 0

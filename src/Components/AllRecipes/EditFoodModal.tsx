@@ -1,4 +1,5 @@
 import * as React from "react";
+import APIURL from '../../helpers/environment';
 import { Modal, ModalBody, ModalHeader, Form, Input } from "reactstrap";
 import { CreateFood } from "../Food/Food.interface";
 import { CurrentEditingFood } from "./RecipeIndex";
@@ -37,7 +38,7 @@ class EditFoodModal extends React.Component<
     };
   }
   handleFoodEdit = async () => {
-    fetch(`http://localhost:4000/drinks/${this.props.currentEditingFood.id}`, {
+    fetch(`${APIURL}/food/${this.props.currentEditingFood.id}`, {
       method: "PUT",
       body: JSON.stringify({ rating: ~~this.state.editRating }),
       headers: new Headers({
@@ -48,22 +49,27 @@ class EditFoodModal extends React.Component<
       .then(()=> this.props.toggleFoodModal())
       .catch((err) => console.error(err));
   };
-  handleFoodDelete = () => {
-    fetch(`http://localhost:4000/food/${this.props.currentEditingFood.id}`, {
+  handleFoodDelete = async () => {
+    try {
+      const res = await
+    fetch(`${APIURL}/food/${this.props.currentEditingFood.id}`, {
       method: "DELETE",
       headers: new Headers({
         "Content-Type": "application/json",
         Authorization: this.props.sessionToken,
       }),
-    }).then (()=> this.props.toggleFoodModal())
+    }
+    )
+  }catch (error) {
+      alert( error )
+      console.error(error)}
+      this.props.toggleFoodModal()
   };
-  reload=()=>window.location.reload()
   render() {
     const food = this.props.currentEditingFood;
     return (
       <div>
         <Modal
-        onExit={this.reload}
           isOpen={this.props.isFoodModalOpen}
           toggle={this.props.toggleFoodModal}>
           <ModalHeader toggle={this.props.toggleFoodModal}></ModalHeader>
@@ -90,7 +96,7 @@ class EditFoodModal extends React.Component<
             </Form>
               <button onClick={()=>this.handleFoodEdit()}>Click to Change Rating</button>
               <button onClick={this.props.toggleFoodModal}>Cancel</button>
-              <button onClick={()=> this.handleFoodDelete()}>Delete</button>
+              <button onClick={()=>this.handleFoodDelete()}>Delete</button>
           </ModalBody>
         </Modal>
       </div>

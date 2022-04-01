@@ -1,5 +1,7 @@
 import * as React from 'react';
+import APIURL from '../../helpers/environment';
 import { ILoginResponse } from './Login.interface';
+
  interface LoginProps {
   updateLocalStorage: (newToken: string, adminStatus: string) => void
 
@@ -18,7 +20,7 @@ import { ILoginResponse } from './Login.interface';
      handleSubmit = async (e: React.FormEvent<HTMLFormElement>) =>{
         e.preventDefault();
         
-        fetch("http://localhost:4000/user/login", {
+        fetch(`${APIURL}/user/login`, {
             method: "POST",
             body: JSON.stringify({ email: this.state.email, password: this.state.password }),
             headers: new Headers({

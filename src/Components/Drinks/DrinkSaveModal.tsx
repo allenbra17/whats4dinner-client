@@ -1,5 +1,6 @@
 import * as React from "react";
 import { CurrentSelectedDrink } from "./DrinksTable";
+import APIURL from '../../helpers/environment';
 import { Modal, ModalBody, ModalHeader, Form, Input } from "reactstrap";
 import { CreateDrinks } from "./Drinks.interface";
 
@@ -37,7 +38,7 @@ class DrinkSaveModal extends React.Component<
     e.preventDefault();
     this.props.toggleModal();
 
-    fetch("http://localhost:4000/drinks/create", {
+    fetch(`${APIURL}/drinks/create`, {
       method: "POST",
       body: JSON.stringify({
         cocktailName: this.state.createDrink.cocktailName,
@@ -52,7 +53,9 @@ class DrinkSaveModal extends React.Component<
       }),
     })
       .then((res) => res.json())
-      .catch((err) => console.error(err));
+      .catch((err) => {
+        alert(err.message)
+        console.error(err)});
   };
   render() {
     return (
@@ -100,7 +103,7 @@ class DrinkSaveModal extends React.Component<
               >
                 Click to Save
               </button>
-              <button onClick={this.props.toggleModal}>Cancel</button>
+              <button onClick={this.modalOpen}>Cancel</button>
             </Form>
           </ModalBody>
         </Modal>

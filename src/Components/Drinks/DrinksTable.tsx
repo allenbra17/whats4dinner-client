@@ -58,7 +58,7 @@ class DrinksTable extends React.Component<DrinksTableProps, DrinksTableState> {
       let image = drinks.strDrinkThumb;
       let drinkURL = `${this.cocktailURL}${drinks.idDrink}`;
       return (
-        <Col xs="12" md="6" lg="2">
+        <Col xs="6" md="3" lg="2" className="pb-2">
           <Card className="cards">
             <CardBody>
             <a href={drinkURL}>

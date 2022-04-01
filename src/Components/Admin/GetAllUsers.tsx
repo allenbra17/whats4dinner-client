@@ -1,4 +1,5 @@
 import * as React from "react";
+import APIURL from "../../helpers/environment";
 import { Modal, ModalBody, ModalHeader, Table, Form, Input } from "reactstrap";
 
 interface GetAllUsersProps {
@@ -14,6 +15,7 @@ interface GetAllUsersState {
     role: string;
     id: string;
   }[];
+  newEmail: string;
   newRole: string;
   newPassword: string;
   confirmPassword: string;
@@ -45,6 +47,7 @@ class GetAllUsers extends React.Component<GetAllUsersProps, GetAllUsersState> {
           id: "",
         },
       ],
+      newEmail: "",
       newRole: "",
       newPassword: "",
       confirmPassword: "",
@@ -53,11 +56,13 @@ class GetAllUsers extends React.Component<GetAllUsersProps, GetAllUsersState> {
       userModal: false,
     };
   }
+  reload = () => window.location.reload();
   toggleUserModal = () => {
     this.setState({ isUserModalOpen: !this.state.isUserModalOpen });
+    this.reload()
   };
   fetchGetAllUsers = () => {
-    fetch("http://localhost:4000/admin/users", {
+    fetch(`${APIURL}/admin/users`, {
       method: "GET",
       headers: new Headers({
         "Content-Type": "application/json",
@@ -69,9 +74,10 @@ class GetAllUsers extends React.Component<GetAllUsersProps, GetAllUsersState> {
         this.setState({ GetAllUsersArray: GetAllUsersData });
       });
   };
+  
   displayGetAllUsers = () => {
     return this.state.GetAllUsersArray.map((users, index) => {
-      return this.state.GetAllUsersArray.length > 1 ? (
+      return this.state.GetAllUsersArray.length > 0 ? (
         <tr key={index}>
           <td scope="row">{users.id}</td>
           <td>{users.firstName}</td>
@@ -94,39 +100,36 @@ class GetAllUsers extends React.Component<GetAllUsersProps, GetAllUsersState> {
       ) : null;
     });
   };
-  handlePasswordUpdate = async () => {
-    fetch(
-      `http://localhost:4000/admin/users/${this.state.currentUpdatingUser.id}`,
-      {
-        method: "PUT",
-        body: JSON.stringify({ password: this.state.newPassword }),
-        headers: new Headers({
-          "Content-Type": "application/json",
-          Authorization: this.props.sessionToken,
-        }),
-      }
-    )
+  handleUserUpdate = async () => {
+    fetch(`${APIURL}/admin/users/${this.state.currentUpdatingUser.id}`, {
+      method: "PUT",
+      body: JSON.stringify({ email: this.state.newEmail, role: this.state.newRole, password: this.state.newPassword }),
+      headers: new Headers({
+        "Content-Type": "application/json",
+        Authorization: this.props.sessionToken,
+      }),
+    })
       .then(() => this.toggleUserModal())
-      .catch((err) => console.error(err));
+      .catch((err) => {
+        alert(err.message);
+        console.error(err);
+      });
   };
   handleUserDelete = () => {
     debugger;
-    fetch(
-      `http://localhost:4000/admin/users/${this.state.currentUpdatingUser.id}`,
-      {
-        method: "DELETE",
-        headers: new Headers({
-          "Content-Type": "application/json",
-          Authorization: this.props.sessionToken,
-        }),
-      }
-    ).then(() => this.toggleUserModal());
+    fetch(`${APIURL}/admin/users/${this.state.currentUpdatingUser.id}`, {
+      method: "DELETE",
+      headers: new Headers({
+        "Content-Type": "application/json",
+        Authorization: this.props.sessionToken,
+      }),
+    }).then(() => this.toggleUserModal());
   };
 
   componentDidMount() {
     this.fetchGetAllUsers();
   }
-  reload = () => window.location.reload();
+
   render() {
     const user = this.state.currentUpdatingUser;
     return (
@@ -144,7 +147,6 @@ class GetAllUsers extends React.Component<GetAllUsersProps, GetAllUsersState> {
           <tbody>{this.displayGetAllUsers()}</tbody>
         </Table>
         <Modal
-          onExit={this.reload}
           isOpen={this.state.isUserModalOpen}
           toggle={this.toggleUserModal}
         >
@@ -157,6 +159,21 @@ class GetAllUsers extends React.Component<GetAllUsersProps, GetAllUsersState> {
             <br />
             <Form>
               <br />
+              <p>Update User Email</p>
+              <Input
+                onChange={(e) => this.setState({ newEmail: e.target.value })}
+                type="email"
+                placeholder="New Email"
+              />
+              <p>Update User Role</p>
+              <Input
+              value={this.state.newRole}
+                onChange={(e) => this.setState({ newRole: e.target.value })}
+                type="select">
+                <option value="" disabled selected>Choose a New Role</option>
+                <option value="admin">Admin</option>
+                <option value="user">User</option>
+              </Input>
               <p>Update User Password</p>
               <Input
                 onChange={(e) => this.setState({ newPassword: e.target.value })}
@@ -165,20 +182,18 @@ class GetAllUsers extends React.Component<GetAllUsersProps, GetAllUsersState> {
               />
               <Input
                 type="password"
-                onChange={(e) =>
-                  this.setState({ confirmPassword: e.target.value })
-                }
+                onChange={(e) => this.setState({ confirmPassword: e.target.value })}
                 placeholder="Confirm Password"
               />
             </Form>
             <button
               onClick={() => {
                 this.state.newPassword === this.state.confirmPassword
-                  ? this.handlePasswordUpdate()
+                  ? this.handleUserUpdate()
                   : alert("Passwords do not match");
               }}
             >
-              Click to Change Password
+              Click to Update User
             </button>
             <button onClick={this.toggleUserModal}>Cancel</button>
             <button onClick={() => this.handleUserDelete()}>Delete User</button>

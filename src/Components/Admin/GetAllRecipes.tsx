@@ -1,4 +1,5 @@
 import * as React from "react";
+import APIURL from '../../helpers/environment';
 import EditDrinksModal from "../AllRecipes/EditDrinksModal";
 import EditFoodModal from "../AllRecipes/EditFoodModal";
 import {
@@ -99,7 +100,7 @@ class GetAllRecipes extends React.Component<
     this.setState({ isDrinkModalOpen: !this.state.isDrinkModalOpen });
   };
   fetchAllDrinks = () => {
-    fetch("http://localhost:4000/admin/drinks", {
+    fetch(`${APIURL}/admin/drinks`, {
       method: "GET",
       headers: new Headers({
         "Content-Type": "application/json",
@@ -114,7 +115,7 @@ class GetAllRecipes extends React.Component<
   displayAllDrinks = () => {
     return this.state.allDrinksArray.map((drinks, index) => {
       return (
-        <Col xs="12" md="8" lg="4">
+        <Col xs="12" md="6" lg="4" className="pb-2">
           <Card className="cards">
             <CardBody>
               <a href={drinks.cocktailURL}>
@@ -146,7 +147,7 @@ class GetAllRecipes extends React.Component<
   };
 
   fetchAllFood = () => {
-    fetch("http://localhost:4000/admin/food/", {
+    fetch(`${APIURL}/admin/food/`, {
       method: "GET",
       headers: new Headers({
         "Content-Type": "application/json",
@@ -161,7 +162,7 @@ class GetAllRecipes extends React.Component<
   displayAllFood = () => {
     return this.state.allFoodArray.map((food, index) => {
       return (
-        <Col xs="12" md="8" lg="4">
+        <Col xs="12" md="6" lg="4" className="pb-2">
           <Card className="cards">
             <CardBody>
               <a href={food.recipeURL}>
@@ -200,7 +201,6 @@ class GetAllRecipes extends React.Component<
           <Row className="food">
             {this.state.allFoodArray.length > 0 ? this.displayAllFood() : null}
           </Row>
-
           <Row className="drinks">
             {this.state.allDrinksArray.length > 0
               ? this.displayAllDrinks()

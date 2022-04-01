@@ -1,4 +1,5 @@
 import * as React from "react";
+import APIURL from '../../helpers/environment';
 import { Modal, ModalBody, ModalHeader, Form, Input } from "reactstrap";
 import { CreateDrinks } from "../Drinks/Drinks.interface";
 import { CurrentEditingDrink } from "./RecipeIndex";
@@ -38,7 +39,7 @@ class EditDrinksModal extends React.Component<
   }
   handleDrinkEdit = async () => {
 
-    fetch(`http://localhost:4000/drinks/${this.props.currentEditingDrink.id}`, {
+    fetch(`${APIURL}/drinks/${this.props.currentEditingDrink.id}`, {
       method: "PUT",
       body: JSON.stringify({ rating: ~~this.state.editRating }),
       headers: new Headers({
@@ -47,25 +48,31 @@ class EditDrinksModal extends React.Component<
       }),
     })
     .then(()=> this.props.toggleDrinkModal())
-    .catch((err) => console.error(err));
+    .catch((err) => {
+      alert(err.message)
+      console.error(err)});
   };
-  handleDrinkDelete = () => {
-    debugger
-    fetch(`http://localhost:4000/drinks/${this.props.currentEditingDrink.id}`, {
+  handleDrinkDelete = async () => {
+    try {
+      const res = await
+    fetch(`${APIURL}/drinks/${this.props.currentEditingDrink.id}`, {
       method: "DELETE",
       headers: new Headers({
         "Content-Type": "application/json",
         Authorization: this.props.sessionToken,
       }),
-    }).then (()=> this.props.toggleDrinkModal())
+    }
+    )
+  }catch (error) {
+      alert( error )
+      console.error(error)}
+      this.props.toggleDrinkModal()
   };
-  reload=()=>window.location.reload()
   render() {
     const drinks = this.props.currentEditingDrink;
     return (
       <div>
         <Modal
-        onExit={this.reload}
         isOpen={true}
         toggle={this.props.toggleDrinkModal}>
           <ModalHeader toggle={this.props.toggleDrinkModal}></ModalHeader>
@@ -92,7 +99,8 @@ class EditDrinksModal extends React.Component<
             </Form>
               <button onClick={()=> this.handleDrinkEdit()}>Click to Change Rating</button>
               <button onClick={this.props.toggleDrinkModal}>Cancel</button>
-              <button onClick={this.handleDrinkDelete}>Delete Now</button>
+              <button onClick={()=> this.handleDrinkDelete()
+}>Delete</button>
           </ModalBody>
         </Modal>
       </div>

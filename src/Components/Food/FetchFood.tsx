@@ -30,16 +30,16 @@ class FetchFood extends React.Component<FetchFoodProps, FetchFoodState> {
   myIngred = () => {
     return this.state.ingredData.map((food, index) => {
       return (
-        <Col xs="12" md="6" lg="2">
+        <Col xs="6" md="3" lg="2" className="pb-2">
           <Card className="cards">
             <CardBody>
               <CardImg
-                src={food.strCategoryThumb}
-                alt={food.strCategory}
-                top
-                height="10%"
-                width="10%"/>
-              <button onClick={() => this.props.handleFetch(food.strCategory)}>
+              src={food.strCategoryThumb}
+              alt={food.strCategory}
+              top
+              />
+              <button
+              onClick={() => this.props.handleFetch(food.strCategory)}>
                 {food.strCategory}
               </button>
             </CardBody>

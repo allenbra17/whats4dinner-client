@@ -56,7 +56,7 @@ class FoodTable extends React.Component<FoodTableProps, FoodTableState> {
       let image = food.strMealThumb;
       let recipeURL = `${this.mealURL}${food.idMeal}`;
       return (
-        <Col xs="12" md="6" lg="2">
+        <Col xs="6" md="3" lg="2" className="pb-2">
           <Card className="cards">
             <CardBody>
             <a href={recipeURL}>
@@ -96,7 +96,7 @@ class FoodTable extends React.Component<FoodTableProps, FoodTableState> {
         <Container>
           <Row>{this.state.foodData.length > 0 ? this.myFood() : null}</Row>
         </Container>
-        {this.state.foodData.length == 0 ? <FetchFood handleFetch={this.handleFetch} /> : null}
+        {this.state.foodData.length === 0 ? <FetchFood handleFetch={this.handleFetch} /> : null}
       </div>
     );
   }
